@@ -1,6 +1,6 @@
 {
-  "name": "HoraExtra",
-  "version": "0.2.5",
+  "name": "minhahoraextra",
+  "version": "0.1.0",
   "description": "Hora extra FCM",
   "engines": {
     "node": "5.9.1"
@@ -27,10 +27,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git.heroku.com/horaextrafcm.git"
+    "url": "https://github.com/SamuelCarneiroFCM/minhahoraextra.git"
   },
   "keywords": [
-    "horaextrafcm"
+    "minhahoraextra"
   ],
   "author": "Samuel Carneiro",
   "license": "MIT"
