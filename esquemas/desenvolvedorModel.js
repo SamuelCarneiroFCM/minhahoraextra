@@ -1,6 +1,26 @@
 var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 
+module.exports = function(){
+
+	var desenvolvedoresSchema = mongoose.Schema({
+		 nome     : {type: String, trim: true, required: true},
+		 email    : {type: String, trim: true, unique: true, index: true},
+		 senha    : {type: String, required: true},
+		 data_cad : {type: Date, default: Date.now}
+	}, {collection: 'desenvolvedores'});
+
+	desenvolvedoresSchema.methods.generateHash = function(password){
+		return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+	};
+
+	desenvolvedoresSchema.methods.validPassword = function(password, old_password){
+		return bcrypt.compareSync(password, old_password, null);
+	}
+
+	return mongoose.model('desenvolvedores', desenvolvedoresSchema);
+}
+/*
 var desenvolvedoresSchema = mongoose.Schema({
 	 nome: {type: String, required: true},
 	 email: {type: String, required: true},
@@ -17,7 +37,7 @@ desenvolvedoresSchema.methods.validarsenha = function(senha) {
 
 exports.Desenvolvedores = mongoose.model('desenvolvedores', desenvolvedoresSchema);
 
-/*
+
 exports.localizardesenvolvedor = function(email, callback) {
 
 	var dev = mongoose.model('desenvolvedores', desenvolvedoresSchema);

@@ -1,37 +1,60 @@
-var express = require('express');
-var app  = express();
+var express          = require('express'),
+    path             = require('path'),
+	  logger           = require('morgan'),
+	  cookieParser     = require('cookie-parser'),
+	  bodyParser   	   = require('body-parser'),
+	  session        	 = require('express-session'),
+	  load          	 = require('express-load'),
+	  mongoose         = require('mongoose'),
+	  flash            = require('express-flash'),
+	  moment           = require('moment'),
+	  expressValidator = require('express-validator'),
+    URLdb            = require('./config/URLdb');
+
+//conexão com o mongodb
+mongoose.connect(URLdb.url, function(err){
+	if(err){
+		console.log("Erro ao conectar no mongodb: " + err);
+	}else{
+		console.log("Conexão com o mongodb efetuada com sucesso!");
+	}
+});
+
+var app = express();
 var port = process.env.PORT || 5000;
-var passport = require('passport');
-var flash = require('connect-flash');
-var morgan       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
-var session      = require('express-session');
+var erros = require("./mediador/erros");
 
-app.set('visoes', 'ejs');
+// view engine
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+app.set('view options', {layout: true});
 
-app.use(morgan('dev'));
-app.use(cookieParser());
+//app.use(favicon());
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
+app.use(cookieParser());
 app.use(session({
-  secret:'fcmsistemassamuelcarneiro',
-  resave: false,
-  saveUninitialized: false})
-);
-app.use(passport.initialize());
-app.use(passport.session());
+   secret: 'samuelcarneirofcmsistemas8118',
+   resave: false,
+   saveUninitialized: false
+ }));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
-app.use(express.static(__dirname + '/public'));
+app.use(function(req, res, next){
+	res.locals.session  = req.session.desenvolvedor;
+	res.locals.isLogged = req.session.desenvolvedor? true : false;
+	res.locals.moment   = moment;
+	next();
+});
 
-require('./config/acesso.js')(passport);
+load('esquemas').then('controller').then('rotas').into(app);
 
-require('./rotas.js')(app, passport);
+//mediador
+app.use(erros.notfound);
+app.use(erros.serverError);
 
 app.listen(port);
 console.log('Aplicativo foi ativado ' + port);
-
-//app.listen(app.get('port'), function() {
-//  console.log('Aplicativo foi ativado', app.get('port'));
-//});
