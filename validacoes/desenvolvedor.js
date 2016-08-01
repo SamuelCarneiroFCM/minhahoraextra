@@ -1,17 +1,19 @@
-var url = require('url');
+//var url = require('url');
 
 module.exports = function(req, res){
   /*
-	var createUrl = url.parse(req.url).pathname == "/desenvolvedor/novo";
+	var createUrl = url.parse(req.url).pathname == "/registro/novo";
 	var updateUrl = !createUrl;
   */
+
 	req.assert('nome', 'Informe o seu Nome.').notEmpty();
   req.assert('email', 'E-mail inválido.').isEmail();
   req.assert('senha', 'Sua senha deve conter de 6 a 10 caracteres.').len(6,10);
 
-	/*if(createUrl){
+  /*
+	if(createUrl){
 		req.assert('email', 'E-mail inválido.').isEmail();
-		req.assert('password', 'Sua senha deve conter de 6 a 10 caracteres.').len(6,10);
+		req.assert('senha', 'Sua senha deve conter de 6 a 10 caracteres.').len(6,10);
 	}
   */
 	var validateErros = req.validationErrors() || [];

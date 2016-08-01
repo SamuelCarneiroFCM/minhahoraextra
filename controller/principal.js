@@ -5,6 +5,7 @@ module.exports = function(app){
 
 	var SistemaController = {
 		login: function(req,res){
+			console.log('passou aqui login');
 			res.render('login');
 		},
 

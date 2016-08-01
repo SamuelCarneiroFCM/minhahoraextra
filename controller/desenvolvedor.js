@@ -4,12 +4,13 @@ module.exports = function(app){
 
 	var DesenvolvedorController = {
 		novo: function(req,res){
-			  res.render('registro', {dev: new Desenvolvedores()});
+        console.log('chegou aqui');
+				res.render('registro/novo')
 		},
 
 		post: function(req,res){
-			if(validacao(req,res)){
-				var esquema      = new Desenvolvedores();
+			if(validacao(req, res)){
+				var esquema      = new Desenvolvedor();
 				esquema.nome     = req.body.nome;
 				esquema.email    = req.body.email;
 				esquema.senha    = esquema.generateHash(req.body.senha);
