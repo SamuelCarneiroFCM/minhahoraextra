@@ -10,12 +10,7 @@ module.exports = function(app){
     },
 
 		login: function(req,res){
-<<<<<<< HEAD:controller/home.js
 			res.render('home/login');
-=======
-			console.log('passou aqui login');
-			res.render('login');
->>>>>>> 8dce35f467c970308392532c8a7fe8058ca2a388:controller/principal.js
 		},
 
 		autenticacao: function(req,res){
@@ -24,7 +19,7 @@ module.exports = function(app){
 			var senha          = req.body.senha;
 
 			if(validacao(req, res)){
-				Desenvolvedor.findOne({'email': email}, function(err,data){
+				Desenvolvedor.findOne({'email': email}, function(err, data){
 					if(err){
 						req.flash('erro', 'Erro ao entrar no sistema: '+err);
 						res.redirect('/');
@@ -37,7 +32,7 @@ module.exports = function(app){
 					}else{
 						console.log(data);
 						req.session.desenvolvedor = data;
-						res.render('home/index', {'dev': data.nome})
+						res.render('home/index', {'dev': data})
 					//	res.redirect('/home');
 					}
 				});
