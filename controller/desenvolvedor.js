@@ -4,11 +4,20 @@ module.exports = function(app){
 
 	var DesenvolvedorController = {
 		novo: function(req,res){
+<<<<<<< HEAD
 			  res.render('home/novo', {dev: new Desenvolvedor()});
 		},
 
 		post: function(req,res){
 			if(validacao(req,res)){
+=======
+        console.log('chegou aqui');
+				res.render('registro/novo')
+		},
+
+		post: function(req,res){
+			if(validacao(req, res)){
+>>>>>>> 8dce35f467c970308392532c8a7fe8058ca2a388
 				var esquema      = new Desenvolvedor();
 				esquema.nome     = req.body.nome;
 				esquema.email    = req.body.email;

@@ -10,7 +10,12 @@ module.exports = function(app){
     },
 
 		login: function(req,res){
+<<<<<<< HEAD:controller/home.js
 			res.render('home/login');
+=======
+			console.log('passou aqui login');
+			res.render('login');
+>>>>>>> 8dce35f467c970308392532c8a7fe8058ca2a388:controller/principal.js
 		},
 
 		autenticacao: function(req,res){
