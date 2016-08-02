@@ -4,16 +4,21 @@ module.exports = function(app){
 	var validacao  = require('../validacoes/autenticacao');
 
 	var SistemaController = {
+
+		index: function(req,res){
+    	res.render('home/index');
+    },
+
 		login: function(req,res){
-			res.render('login');
+			res.render('home/login');
 		},
 
 		autenticacao: function(req,res){
-			var desenvolvedor  = new Desenvolvedores();
+			var desenvolvedor  = new Desenvolvedor();
 			var email          = req.body.email;
 			var senha          = req.body.senha;
 
-			if(validacao(req,res)){
+			if(validacao(req, res)){
 				Desenvolvedor.findOne({'email': email}, function(err,data){
 					if(err){
 						req.flash('erro', 'Erro ao entrar no sistema: '+err);
@@ -25,8 +30,10 @@ module.exports = function(app){
 						req.flash('erro', 'Senha não confere!');
 						res.redirect('/');
 					}else{
+						console.log(data);
 						req.session.desenvolvedor = data;
-						res.redirect('/index');
+						res.render('home/index', {'dev': data.nome})
+					//	res.redirect('/home');
 					}
 				});
 			}else{

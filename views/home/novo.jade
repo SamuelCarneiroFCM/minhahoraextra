@@ -1,10 +1,10 @@
-extends layout
+extends ../layout
 
 block header          
   h1 Registro
 block content
   div(class="ui-body ui-body-a")
-    form(method="POST", action="/desenvolvedor", class="form-registro")
+    form(method="POST", action="/registro", class="form-registro")
       if messages.erro
         br
         div(class="alert alert-danger")
@@ -14,13 +14,13 @@ block content
             br
       div(class="form-group")
         label Nome:
-        input(type="text", class="form-control", name="nome", value="#{dev.nome || ''}", placeholder="Nome", autofocus, required)
+        input(type="text", class="form-control", name="nome", value="#{dev.nome || ''}" placeholder="Nome", autofocus, required)
       div(class="form-group")
         label E-mail:
-        input(type="email", class="form-control", placeholder="E-mail", name="email", value="#{dev.email || ''}", required)
+        input(type="email", class="form-control", value="#{dev.email || ''}" placeholder="E-mail", name="email",  required)
       div(class="form-group")
         label Senha:
-        input(type="password", class="form-control", placeholder="Senha", name="senha",  value="#{dev.senha || ''}", required)
+        input(type="password", class="form-control", placeholder="Senha", name="senha",  required)
         div(class="form-group")
           label Confirmar senha:
           input(type="password", class="form-control", name="senha_confirmar", placeholder="Confirmar Senha", required)

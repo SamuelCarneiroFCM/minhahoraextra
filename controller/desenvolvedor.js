@@ -4,12 +4,12 @@ module.exports = function(app){
 
 	var DesenvolvedorController = {
 		novo: function(req,res){
-			  res.render('registro', {dev: new Desenvolvedores()});
+			  res.render('home/novo', {dev: new Desenvolvedor()});
 		},
 
 		post: function(req,res){
 			if(validacao(req,res)){
-				var esquema      = new Desenvolvedores();
+				var esquema      = new Desenvolvedor();
 				esquema.nome     = req.body.nome;
 				esquema.email    = req.body.email;
 				esquema.senha    = esquema.generateHash(req.body.senha);
@@ -17,15 +17,15 @@ module.exports = function(app){
 				Desenvolvedor.findOne({'email': esquema.email}, function(err,data){
 					if(data){
 						req.flash('erro', 'E-mail encontra-se cadastrado, tente outro.');
-						res.render('registro', {dev: esquema});
+						res.render('home/novo', {dev: esquema});
 					}else{
 						esquema.save(function(err){
 							if(err){
 								req.flash('erro', 'Erro ao cadastrar: '+err);
-								res.render('registro', {dev: esquema});
+								res.render('home/novo', {dev: esquema});
 							}else{
 								req.flash('info', 'Registro cadastrado com sucesso!');
-								res.render('index', {dev: esquema});
+								res.render('/');
 							}
 						});
 					}

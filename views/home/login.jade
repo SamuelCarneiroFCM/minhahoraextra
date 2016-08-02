@@ -1,11 +1,11 @@
-extends layout
+extends ../layout
 
 block header          
   h1 Login
-  a(href="/desenvolvedor" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext ui-btn-inline") Registrar
+  a(href="/registro" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext ui-btn-inline") Registrar
 block content
   div(class="ui-body ui-body-a")
-    form(method="GET", action="/", class="form-login")
+    form(method="POST", action="/", class="form-login")
       if messages.erro
         br
         div(class="alert alert-danger")
@@ -18,5 +18,5 @@ block content
         input(type="email", class="form-control", placeholder="E-mail", name="email", autofocus, required)
       div(class="form-group")
         label Senha:
-        input(type="password", class="form-control", placeholder="Senha", name="password", required)
+        input(type="password", class="form-control", placeholder="Senha", name="senha", required)
       button(type="submit", class="btn btn-primary btn-block") Entrar

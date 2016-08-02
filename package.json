@@ -19,10 +19,10 @@
     "express-load": "^1.1.15",
     "express-session": "^1.14.0",
     "express-validator": "^2.20.8",
-    "jade": "latest",
+    "jade": "*",
     "moment": "^2.14.1",
-    "mongoose": "^4.4.19",
-    "morgan": "^1.7.0",
+    "mongoose": "*",
+    "morgan": "*",
     "nodemailer": "^2.5.0"
   },
   "repository": {
