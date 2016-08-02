@@ -30,7 +30,6 @@ module.exports = function(app){
 						req.flash('erro', 'Senha não confere!');
 						res.redirect('/');
 					}else{
-						console.log(data);
 						req.session.desenvolvedor = data;
 						res.render('home/index', {'dev': data})
 					//	res.redirect('/home');
