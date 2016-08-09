@@ -9,6 +9,10 @@ module.exports = function(app){
     	res.render('home/index');
     },
 
+		novo: function(req,res){
+    	res.render('home/novo');
+    },
+
 		login: function(req,res){
 			res.render('home/login');
 		},

@@ -7,6 +7,7 @@ module.exports = function(app){
 		.get(sistema.login)
 		.post(sistema.autenticacao);
 
+	app.route('/home/novo').get(sistema.novo);	   
   app.route('/home').get(autenticar, sistema.index);
 	app.route('/logout').get(sistema.logout);
 

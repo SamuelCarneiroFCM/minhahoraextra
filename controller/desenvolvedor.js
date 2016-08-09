@@ -4,7 +4,6 @@ module.exports = function(app){
 
 	var DesenvolvedorController = {
 		novo: function(req,res){
-			  console.log('aqui');
 			  res.render('home/novo');
 		},
 
@@ -17,15 +16,15 @@ module.exports = function(app){
 				Desenvolvedor.findOne({'email': esquema.email}, function(err,data){
 					if(data){
 						req.flash('erro', 'E-mail encontra-se cadastrado, tente outro.');
-						res.render('home/novo', {'dev': esquema});
+						res.render('home/novo', {'dev': data});
 					}else{
 						esquema.save(function(err){
 							if(err){
 								req.flash('erro', 'Erro ao cadastrar: ' + err);
-								res.render('home/novo', {'dev': esquema});
+								res.render('home/novo');
 							}else{
 								req.flash('info', 'Registro cadastrado com sucesso!');
-								req.session.desenvolvedor = data;
+								req.session.desenvolvedor = esquema;
 								res.render('home/index', {'dev': esquema});
 							}
 						});
