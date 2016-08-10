@@ -3,6 +3,7 @@ module.exports = function(app){
 	var Desenvolvedor = app.esquemas.desenvolvedorModel;
 
 	var DesenvolvedorController = {
+
 		novo: function(req,res){
 			  res.render('home/novo');
 		},

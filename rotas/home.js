@@ -1,14 +1,14 @@
 module.exports = function(app){
 
-	var sistema    = app.controller.home;
+	var home    = app.controller.home;
 	var autenticar = require('../mediador/autenticar');
 
 	app.route('/')
-		.get(sistema.login)
-		.post(sistema.autenticacao);
+		.get(home.login)
+		.post(home.autenticacao);
 
-	app.route('/home/novo').get(sistema.novo);	   
-  app.route('/home').get(autenticar, sistema.index);
-	app.route('/logout').get(sistema.logout);
+	app.route('/home/novo').get(home.novo);
+  app.route('/home').get(autenticar, home.index);
+	app.route('/logout').get(home.logout);
 
 }

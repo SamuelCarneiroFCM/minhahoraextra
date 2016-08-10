@@ -1,31 +1,17 @@
-doctype html
-head
-  title= "Hora Extra"
-  meta(http-equiv="Content-Type" content="text/html charset=utf-8")
-  meta(name="viewport" content="width=device-width, initial-scale=1")
-  link(rel="stylesheet", href="css/jquery.mobile-1.4.5.min.css")
-  script(src="js/jquery.js")
-  script(src="js/jquery.mobile-1.4.5.min.js")
-  body
-    div#principal(data-role="page")
-        div(data-role="header", data-position="fixed")
-            h1 Hora Extra
-            a(href="#nav-panel" data-icon="bars" data-iconpos="notext") Menu
-            a(href="/logout" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power") #{dev.nome}
-        div(data-role="container")
-        div(data-role="footer", data-position="fixed")
-          h3 &copy; 2016 Samuel Carneiro
-        div(data-role="panel" data-position-fixed="true" data-display="push" data-theme="a" id="nav-panel")
-          ul(data-role="listview")
-            li
-              a(href="#" data-rel="close") Fechar menu
-            li 
-              a(href="#addhoraextra") Adicionar
-          
-    div#addhoraextra(data-role="page")
-        div(data-role="header", data-position="fixed")
-            h1 Add Hora Extra
-            a(href="#principal" data-ajax="false" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l")
-        div(data-role="container")
-        div(data-role="footer", data-position="fixed")
-          h3 &copy; 2016 Samuel Carneiro
+extends ../layout
+block content
+  #principal(data-role="page")
+    div(data-role="header", data-position="fixed")
+        h1 Hora Extra
+        a(href="#nav-panel" data-icon="bars" data-iconpos="notext") Menu
+        a(href="/logout" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power") #{dev.nome}
+    div(data-role="container")
+    div(data-role="footer", data-position="fixed")
+      h3 &copy; 2016 Samuel Carneiro
+    div(data-role="panel" data-position-fixed="true" data-display="push" data-theme="a" id="nav-panel")
+      ul(data-role="listview")
+        li
+          a(href="#" data-rel="close") Fechar menu
+        li 
+          a(href="#addhoraextra") Adicionar
+        
