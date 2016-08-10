@@ -24,9 +24,13 @@ block content
           div(class="form-group")
             label Senha:
             input(type="password", class="form-control", placeholder="Senha", name="senha", required)
-            div(class="form-group")
-              label Confirmar senha:
-              input(type="password", class="form-control", name="senha_confirmar", placeholder="Confirmar Senha", required)
+          div(class="form-group")
+            label Confirmar senha:
+            input(type="password", class="form-control", name="senha_confirmar", placeholder="Confirmar Senha", required)
+          div(class="form-group")
+            label Salário:        
+            input(type="number" name="number" pattern="[0-9.]*",  value="")
+            
           button(type="submit", class="btn btn-primary btn-block") Gravar    
 
     div(data-role="footer", data-position="fixed")

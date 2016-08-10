@@ -7,6 +7,8 @@ module.exports = function(){
 		 nome     : {type: String, trim: true, required: true},
 		 email    : {type: String, trim: true, unique: true, index: true},
 		 senha    : {type: String, required: true},
+		 salario  : {type : Double(), required: true},
+		 total_dias: {type : int(), required: true},
 		 data_cad : {type: Date, default: Date.now}
 	}, {collection: 'desenvolvedores'});
 
