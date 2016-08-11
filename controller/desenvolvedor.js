@@ -10,10 +10,13 @@ module.exports = function(app){
 
 		post: function(req,res){
 			if(validacao(req, res)){
-				var esquema      = new Desenvolvedor();
-				esquema.nome     = req.body.nome;
-				esquema.email    = req.body.email;
-				esquema.senha    = esquema.generateHash(req.body.senha);
+				var esquema         = new Desenvolvedor();
+				esquema.nome        = req.body.nome;
+				esquema.email       = req.body.email;
+				esquema.senha       = esquema.generateHash(req.body.senha);
+				esquema.salario     = req.body.salario;
+				esquema.horasemanal = req.body.horasemanal; 
+
 				Desenvolvedor.findOne({'email': esquema.email}, function(err,data){
 					if(data){
 						req.flash('erro', 'E-mail encontra-se cadastrado, tente outro.');

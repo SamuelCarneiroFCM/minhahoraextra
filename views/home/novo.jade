@@ -29,7 +29,10 @@ block content
             input(type="password", class="form-control", name="senha_confirmar", placeholder="Confirmar Senha", required)
           div(class="form-group")
             label Salário:        
-            input(type="number" name="number" pattern="[0-9.]*",  value="")
+            input(type="number", name="salario" pattern="^\d+(\.|\,)\d{2}$", placeholder="Preencher sem o ponto e a virgular", required)
+          div(class="form-group")
+            label Total de jornada de trabalho:        
+            input(type="range", name="horasemanal", value="220" min="120" max="320", required)
             
           button(type="submit", class="btn btn-primary btn-block") Gravar    
 
