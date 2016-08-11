@@ -6,11 +6,11 @@ module.exports = function(app){
 	var SistemaController = {
 
 		addhoraextra: function(req,res){
-    	res.render('home/addhoraextra');
+    	res.render('home/addhoraextra', {'dev' : req.session.desenvolvedor});
     },
 
 		index: function(req,res){
-    	res.render('home/index');
+    	res.render('home/index', {'dev' : req.session.desenvolvedor});
     },
 
 		novo: function(req,res){

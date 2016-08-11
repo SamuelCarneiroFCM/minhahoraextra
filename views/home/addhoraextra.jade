@@ -2,7 +2,38 @@ extends ../layout
 block content
   #addhoraextra(data-role="page")
     div(data-role="header", data-position="fixed")
-        h1 Adicionar hora extra
+      h1 Cadastrar
+      a(href="/home" data-icon="back" data-iconpos="notext" class="ui-link ui-btn-right ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button") Voltar      
     div(data-role="container")
+      div(class="ui-corner-all custom-corners")      
+        div(class="ui-body ui-body-a")
+          form(action="/horastrabalhadas" method="post")
+             if messages.erro
+               br
+               div(class="alert alert-danger")
+                 each msg in messages.erro
+                   b= msg
+                   br
+                   br        
+              div(class="form-group")
+                  label Email:
+                  input(type="email", name="email", data-clear-btn="false", disabled="disabled", class="form-control", value="#{dev.email}")
+              div(class="form-group")
+                  label Solicitação:
+                  input(type="text", data-clear-btn="true", name="solicitacao",  placeholder="ML-00001", value="")
+              div(class="form-group")
+                  label Data do início:
+                  input(type="date", data-clear-btn="true", name="datainicial", value="")                 
+              div(class="form-group")
+                  label Hora do início:
+                  input(type="time", data-clear-btn="true", name="horainicial", value="")
+              div(class="form-group")
+                  label Data de final:
+                  input(type="date", data-clear-btn="true", name="datafinal", value="")
+              div(class="form-group")
+                  label Hora de final:
+                  input(type="time", data-clear-btn="true", name="horafinal", value="")
+              button(href="/home" type="submit" class="btn btn-primary") Adicionar
+                             
     div(data-role="footer", data-position="fixed")
       h3 &copy; 2016 Samuel Carneiro

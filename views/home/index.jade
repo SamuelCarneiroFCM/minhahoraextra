@@ -6,6 +6,13 @@ block content
         a(href="#nav-panel" data-icon="bars" data-iconpos="notext") Menu
         a(href="/logout" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power") #{dev.nome}
     div(data-role="container")
+        #tabs(data-role="tabs")
+          div(data-role="navbar")
+            ul
+              li
+                a(href="#iniciarhora") Iniciar Hora
+              li
+                a(href="#addhoraextra") Gráfico
     div(data-role="footer", data-position="fixed")
       h3 &copy; 2016 Samuel Carneiro
     div(data-role="panel" data-position-fixed="true" data-display="push" data-theme="a" id="nav-panel")
