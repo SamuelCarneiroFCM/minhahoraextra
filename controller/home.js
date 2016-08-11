@@ -5,6 +5,10 @@ module.exports = function(app){
 
 	var SistemaController = {
 
+		addhoraextra: function(req,res){
+    	res.render('home/addhoraextra');
+    },
+
 		index: function(req,res){
     	res.render('home/index');
     },

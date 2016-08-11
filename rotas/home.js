@@ -10,5 +10,6 @@ module.exports = function(app){
 	app.route('/home/novo').get(home.novo);
   app.route('/home').get(autenticar, home.index);
 	app.route('/logout').get(home.logout);
+	app.route('/addhoraextra').get(autenticar, home.addhoraextra);
 
 }
