@@ -22,8 +22,9 @@ module.exports = function(app){
 		},
 
 		autenticacao: function(req,res){
+			var emailUPPER = req.body.email;
 			var desenvolvedor  = new Desenvolvedor();
-			var email          = req.body.email;
+			var email          = emailUPPER;
 			var senha          = req.body.senha;
 
 			if(validacao(req, res)){

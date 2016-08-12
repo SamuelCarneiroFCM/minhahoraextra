@@ -1,7 +1,9 @@
 module.exports = function(app){
 	var validacao = require('../validacoes/desenvolvedor');
+	var validacaohora = require('../validacoes/Horaextra');
 	var Desenvolvedor = app.esquemas.desenvolvedorModel;
-	var funcoes = require("./config/funcoes.js");
+	var Horaextra = app.esquemas.horatrabalhadaModel;
+	var funcoes = require('../config/funcoes.js');
 
 
 	var DesenvolvedorController = {
@@ -12,10 +14,33 @@ module.exports = function(app){
 
 		addhoraextra: function(req,res){
 
-			if(validacao(req, res)){
-				
+			if(validacaohora(req, res)){
 
-			  res.render('home/index', {'dev': req.session.desenvolvedor});
+				var emailUPPER = req.session.desenvolvedor.email;
+
+				var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
+					req.body.datafinal, req.body.horafinal);
+
+				var hora = {
+					email: emailUPPER.toUpperCase(),
+					solicitacao: req.body.solicitacao,
+					datainicial: req.body.datainicial,
+					horainicial: req.body.horainicial,
+					datafinal: req.body.datafinal,
+					horafinal: req.body.horafinal,
+					quantidadejornada: qtdhora
+				};
+
+				var esquema = new Horaextra(hora);
+
+				esquema.save(function(err, result) {
+					if(err){
+						req.flash('erro', 'Erro ao cadastrar a hora extra' + err);
+					}else{
+						res.render('home/index', {'dev': req.session.desenvolvedor});
+					}
+				});
+
 			}
 			else{
 				res.render('home/addhoraextra', {'dev' : req.session.desenvolvedor});
@@ -24,9 +49,11 @@ module.exports = function(app){
 
 		post: function(req,res){
 			if(validacao(req, res)){
+				var emailUPPER = req.body.email;
+
 				var esquema         = new Desenvolvedor();
 				esquema.nome        = req.body.nome;
-				esquema.email       = req.body.email;
+				esquema.email       = emailUPPER;
 				esquema.senha       = esquema.generateHash(req.body.senha);
 				esquema.salario     = req.body.salario;
 				esquema.horasemanal = req.body.horasemanal;
