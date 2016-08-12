@@ -1,11 +1,25 @@
 module.exports = function(app){
 	var validacao = require('../validacoes/desenvolvedor');
 	var Desenvolvedor = app.esquemas.desenvolvedorModel;
+	var funcoes = require("./config/funcoes.js");
+
 
 	var DesenvolvedorController = {
 
 		novo: function(req,res){
 			  res.render('home/novo');
+		},
+
+		addhoraextra: function(req,res){
+
+			if(validacao(req, res)){
+				
+
+			  res.render('home/index', {'dev': req.session.desenvolvedor});
+			}
+			else{
+				res.render('home/addhoraextra', {'dev' : req.session.desenvolvedor});
+			}
 		},
 
 		post: function(req,res){
@@ -15,7 +29,7 @@ module.exports = function(app){
 				esquema.email       = req.body.email;
 				esquema.senha       = esquema.generateHash(req.body.senha);
 				esquema.salario     = req.body.salario;
-				esquema.horasemanal = req.body.horasemanal; 
+				esquema.horasemanal = req.body.horasemanal;
 
 				Desenvolvedor.findOne({'email': esquema.email}, function(err,data){
 					if(data){
