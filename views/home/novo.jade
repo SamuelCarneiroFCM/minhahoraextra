@@ -6,7 +6,7 @@ block content
         h1 Registro
         a(href="/" class="ui-btn ui-shadow ui-corner-all ui-icon-lock ui-btn-icon-notext ui-btn-inline") Login 
     div(data-role="container")
-      div(class="ui-body ui-body-a")
+      div(role="main", class="ui-body ui-body-a")
         form(method="POST", action="/registro/novo", class="form-registro")
           if messages.erro
             br

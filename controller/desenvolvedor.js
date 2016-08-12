@@ -13,10 +13,8 @@ module.exports = function(app){
 		},
 
 		addhoraextra: function(req,res){
-
 			if(validacaohora(req, res)){
-
-				var emailUPPER = req.session.desenvolvedor.email;
+				var emailUPPER = req.body.email;
 
 				var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
 					req.body.datafinal, req.body.horafinal);
@@ -31,13 +29,13 @@ module.exports = function(app){
 					quantidadejornada: qtdhora
 				};
 
-				var esquema = new Horaextra(hora);
+				var horas = new Horaextra(hora);
 
-				esquema.save(function(err, result) {
+				horas.save(function(err, horas) {
 					if(err){
 						req.flash('erro', 'Erro ao cadastrar a hora extra' + err);
 					}else{
-						res.render('home/index', {'dev': req.session.desenvolvedor});
+            console.log(horas);
 					}
 				});
 
