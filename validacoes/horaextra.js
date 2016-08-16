@@ -19,5 +19,6 @@ module.exports = function(req, res){
 		return false;
 	}else{
 		return true;
+		console.log('passou aqui 1');
 	}
 }

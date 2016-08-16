@@ -11,6 +11,9 @@ module.exports = function(app){
 		novo: function(req,res){
 			  res.render('home/novo');
 		},
+    novoaddhoraextra: function(req,res){
+			res.render('home/addhoraextra');
+		},
 
 		addhoraextra: function(req,res){
 			if(validacaohora(req, res)){
@@ -34,8 +37,10 @@ module.exports = function(app){
 				horas.save(function(err, horas) {
 					if(err){
 						req.flash('erro', 'Erro ao cadastrar a hora extra' + err);
+						res.render('home/index', {'dev' : req.session.desenvolvedor});
 					}else{
-            console.log(horas);
+            console.log('passou hora extra');
+						res.render('home/index', {'dev' : req.session.desenvolvedor});
 					}
 				});
 
