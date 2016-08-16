@@ -60,6 +60,7 @@ module.exports = function(app){
 				esquema.senha       = esquema.generateHash(req.body.senha);
 				esquema.salario     = req.body.salario;
 				esquema.horasemanal = req.body.horasemanal;
+				esquema.fator       = req.body.fator;
 
 				Desenvolvedor.findOne({'email': esquema.email}, function(err,data){
 					if(data){

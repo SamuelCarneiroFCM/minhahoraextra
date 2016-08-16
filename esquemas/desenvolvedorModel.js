@@ -9,6 +9,7 @@ module.exports = function(){
 		 senha    : {type: String, required: true},
 		 salario  : {type : String, required: true},
 		 horasemanal: {type: Number, min: 120, max: 320, required: true},
+     fator: {type: Number, min: 1, max: 100, required: true},		 
 		 data_cad : {type: Date, default: Date.now}
 	}, {collection: 'desenvolvedores'});
 
