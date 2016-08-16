@@ -7,7 +7,7 @@ module.exports = function(app){
 
 
 	var DesenvolvedorController = {
-
+		
 		novo: function(req,res){
 			  res.render('home/novo');
 		},
@@ -39,7 +39,6 @@ module.exports = function(app){
 						req.flash('erro', 'Erro ao cadastrar a hora extra' + err);
 						res.render('home/index', {'dev' : req.session.desenvolvedor});
 					}else{
-            console.log('passou hora extra');
 						res.render('home/index', {'dev' : req.session.desenvolvedor});
 					}
 				});

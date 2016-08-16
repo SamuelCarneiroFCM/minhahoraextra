@@ -6,11 +6,18 @@ block content
         a(href="#nav-panel" data-icon="bars" data-iconpos="notext") Menu
         a(href="/logout" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power") #{dev.nome}
     div(role="main", data-role="container")
+        if messages.erro
+          br
+          div(class="alert alert-danger")
+            each msg in messages.erro
+              b= msg
+              br
+              br            
         #tabs(data-role="tabs")
           div(data-role="navbar")
             ul
               li
-                a(href="#iniciarhora") Iniciar Hora
+                a(href="#cosultarhoraextra") Hora Extra
               li
                 a(href="#addhoraextra") Gráfico
     div(data-role="footer", data-position="fixed")

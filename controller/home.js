@@ -10,7 +10,11 @@ module.exports = function(app){
     },
 
 		index: function(req,res){
-    	res.render('home/index', {'dev' : req.session.desenvolvedor});
+			var resultado = {
+				title: "Teste",
+				content: "Teste1"
+			};
+    	res.render('home/index', {'dev' : req.session.desenvolvedor, 'datos': resultado});
     },
 
 		novo: function(req,res){
