@@ -1,8 +1,7 @@
 
 module.exports = function(req, res){
 	var funcoes = require('../config/funcoes.js');
-
-	req.assert('solicitacao', 'Informe a solicitação.').notEmpty();
+	
   req.assert('email', 'E-mail inválido.').isEmail();
 	req.assert('solicitacao', 'Informe uma solicitação.').notEmpty();
   req.assert('datainicial', 'Informe a data inicial.').notEmpty();

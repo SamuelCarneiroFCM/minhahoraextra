@@ -11,5 +11,6 @@ module.exports = function(app){
   app.route('/home').get(autenticar, home.index);
 	app.route('/logout').get(home.logout);
 	app.route('/addhoraextra').get(autenticar, home.addhoraextra);
-	
+	app.route('/horaextraatual/delete/:id').post(autenticar, home.excluir);
+
 }

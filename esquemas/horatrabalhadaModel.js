@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 module.exports = function(){
 
 	var horatrabalhadaSchema = mongoose.Schema({
-		 email    : {type: String, trim: true, unique: true, index: true},
+		 email    : {type: String, trim: true, required: true},
 		 solicitacao: {type: String, required: true},
 		 datainicial: {type: String, required: true},
 	   horainicial: {type: String, required: true},

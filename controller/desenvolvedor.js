@@ -16,14 +16,13 @@ module.exports = function(app){
 		},
 
 		addhoraextra: function(req,res){
-			if(validacaohora(req, res)){
-				var emailUPPER = req.body.email;
 
+			if(validacaohora(req, res)){
 				var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
 					req.body.datafinal, req.body.horafinal);
 
 				var hora = {
-					email: emailUPPER,
+					email: req.body.email,
 					solicitacao: req.body.solicitacao,
 					datainicial: req.body.datainicial,
 					horainicial: req.body.horainicial,
@@ -34,28 +33,35 @@ module.exports = function(app){
 
 				var horas = new Horaextra(hora);
 
-				horas.save(function(err, horas) {
+				horas.save(function(err, result) {
 					if(err){
 						req.flash('erro', 'Erro ao cadastrar a hora extra' + err);
-						res.render('home/index', {'dev' : req.session.desenvolvedor});
+						res.render('home/addhoraextra', {dev : req.session.desenvolvedor});
 					}else{
-						res.render('home/index', {'dev' : req.session.desenvolvedor});
+						var data = {dev : req.session.desenvolvedor};
+						Horaextra.find({'email': data.email},
+							function(err, dados){
+								if(err){
+									req.flash('erro', 'Erro ao visualizar as horas adicionadas: '+ err);
+									res.redirect('/');
+								}else{
+									console.log(dados);									
+									res.render('home/index', {dev: data, 'horas': dados});
+								}
+						});
 					}
 				});
-
 			}
 			else{
-				res.render('home/addhoraextra', {'dev' : req.session.desenvolvedor});
+				res.render('home/addhoraextra', {dev : req.session.desenvolvedor});
 			}
 		},
 
 		post: function(req,res){
 			if(validacao(req, res)){
-				var emailUPPER = req.body.email;
-
 				var esquema         = new Desenvolvedor();
 				esquema.nome        = req.body.nome;
-				esquema.email       = emailUPPER;
+				esquema.email       = req.body.email;
 				esquema.senha       = esquema.generateHash(req.body.senha);
 				esquema.salario     = req.body.salario;
 				esquema.horasemanal = req.body.horasemanal;
