@@ -17,7 +17,11 @@ block content
           div(data-role="navbar")
             ul
               li
-                a(href="#cosultarhoraextra") Hora Extra
+                a(href="#addhoraextra") Lista de horas   
+                  div(class="ui-body ui-body-a")                       
+                  ul
+                   each val, index in horas.dados
+                   li= val[index].datainicial                  
               li
                 a(href="#addhoraextra") Gráfico
     div(data-role="footer", data-position="fixed")

@@ -7,7 +7,7 @@ module.exports = function(app){
 
 
 	var DesenvolvedorController = {
-		
+
 		novo: function(req,res){
 			  res.render('home/novo');
 		},
@@ -23,7 +23,7 @@ module.exports = function(app){
 					req.body.datafinal, req.body.horafinal);
 
 				var hora = {
-					email: emailUPPER.toUpperCase(),
+					email: emailUPPER,
 					solicitacao: req.body.solicitacao,
 					datainicial: req.body.datainicial,
 					horainicial: req.body.horainicial,
