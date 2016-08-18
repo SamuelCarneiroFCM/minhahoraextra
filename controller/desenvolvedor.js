@@ -11,8 +11,21 @@ module.exports = function(app){
 		novo: function(req,res){
 			  res.render('home/novo');
 		},
-    novoaddhoraextra: function(req,res){
-			res.render('home/addhoraextra');
+
+		listahoraextra: function(req, res){
+      console.log(res.url);
+
+			Horaextra.find({'email' : 'samuel.a.carneiro@gmail.com'},
+				function(err, dados) {
+					if(err){
+						req.flash('erro', 'Erro ao listar a hora extra' + err);
+						res.render('/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : 0});
+
+					}else{
+						console.log(dados);
+						res.render('home/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : dados});
+					}
+			});
 		},
 
 		addhoraextra: function(req,res){
@@ -38,17 +51,7 @@ module.exports = function(app){
 						req.flash('erro', 'Erro ao cadastrar a hora extra' + err);
 						res.render('home/addhoraextra', {dev : req.session.desenvolvedor});
 					}else{
-						var data = {dev : req.session.desenvolvedor};
-						Horaextra.find({'email': data.email},
-							function(err, dados){
-								if(err){
-									req.flash('erro', 'Erro ao visualizar as horas adicionadas: '+ err);
-									res.redirect('/');
-								}else{
-									console.log(dados);									
-									res.render('home/index', {dev: data, 'horas': dados});
-								}
-						});
+						res.render('home/index', {'dev': req.session.desenvolvedor});
 					}
 				});
 			}

@@ -3,40 +3,18 @@ block content
   #principal(data-role="page")
     div(data-role="header", data-position="fixed")
         h1 Hora Extra
-        a(href="#nav-panel" data-icon="bars" data-iconpos="notext") Menu
-        a(href="/logout" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power") #{dev.nome}
+        a(href="#nav-panel" data-icon="bars" data-iconpos="notext" data-theme="b") Menu
+        a(href="/logout" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power ui-btn-b") #{dev.nome}
     div(role="main", data-role="container")
         if messages.erro
-          br
           div(class="alert alert-danger")
-            each msg in messages.erro
-              b= msg
-              br
-              br            
+            p #{messages.erro}
+          br
+        if messages.info
+          div(class="alert alert-success")
+            p #{messages.info}
+          br
         div(class="ui-body ui-body-a")  
-          if horas.length > 0      
-            table#listahoraextra(data-role="table" data-mode="reflow" class=" table-stroke ui-responsive")             
-              thead(class="ui-bar-d")                         
-                tr                      
-                  th(data-priority="1") Solicitação
-                  th(data-priority="2") Data Inicial
-                  th(data-priority="3") Hora Inicial
-                  th(data-priority="4") Data Final
-                  th(data-priority="5") Hora Final
-                  th(data-priority="6")
-              tbody                
-                each hora in horas
-                  tr                      
-                    th #{hora.solicitacao}
-                    td #{hora.datainicial}           
-                    td #{hora.horainicial}           
-                    td #{hora.datafinal}           
-                    td #{hora.horafinal}                          
-                    td 
-                      a(href="javascript: Excluir('#{hora._id}');" class="ui-btn ui-mini") Excluir
-          else
-            p Nenhuma hora extra adicionada!
-                      
                                                                 
     div(data-role="footer", data-position="fixed")
       h3 &copy; 2016 Samuel Carneiro
@@ -46,25 +24,5 @@ block content
           a(href="#" data-rel="close") Fechar menu
         li 
           a(href="/addhoraextra") Adicionar
-          
-block scripts
-  script(type="text/javascript").
-    function Excluir(id){
-      var pergunta = confirm('Deseja realmente excluir?');
-      if(pergunta){
-        $.ajax({
-          url: '/horaextraatual/delete/'+id,
-          dataType: 'json',
-          type: 'POST',
-          statusCode: {
-          	200: function(data){
-          		alert(data);
-          		window.location.reload();
-          	},
-          	400: function(data){
-          		alert(data);
-          	}
-          }
-      	});
-      }
-    }        
+        li 
+          a(href="/consultahoraextra") Consultar

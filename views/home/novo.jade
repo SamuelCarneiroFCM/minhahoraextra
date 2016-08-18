@@ -4,17 +4,18 @@ block content
   #registro(data-role="page")
     div(data-role="header", data-position="fixed")
         h1 Registro
-        a(href="/" class="ui-btn ui-shadow ui-corner-all ui-icon-lock ui-btn-icon-notext ui-btn-inline") Login 
+        a(href="/" class="ui-btn ui-shadow ui-corner-all ui-icon-lock ui-btn-icon-notext ui-btn-b ui-btn-inline") Login 
     div(data-role="container")
       div(role="main", class="ui-body ui-body-a")
         form(method="POST", action="/registro/novo", class="form-registro")
           if messages.erro
-            br
             div(class="alert alert-danger")
-              each msg in messages.erro
-                b= msg
-                br
-                br
+              p #{messages.erro}
+            br
+          if messages.info
+            div(class="alert alert-success")
+              p #{messages.info}
+            br
           div(class="form-group")
             label Nome:
             input(type="text", class="form-control", name="nome", placeholder="Nome", autofocus, required)

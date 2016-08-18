@@ -10,7 +10,10 @@ module.exports = function(app){
 		.post(desenvolvedor.post);
 
 	app.route('/horastrabalhadas')
-	  .get(autenticar, desenvolvedor.novoaddhoraextra)
 	  .post(autenticar, desenvolvedor.addhoraextra);
+
+	app.route('/listahoraextra')
+		.get(autenticar, desenvolvedor.listahoraextra);
+
 
 }

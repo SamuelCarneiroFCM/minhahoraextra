@@ -4,17 +4,14 @@ block content
   #login(data-role="page")
       div(data-role="header", data-position="fixed")
           h1 Login
-          a(href="/registro" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext ui-btn-inline") Registrar
+          a(href="/registro" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext ui-btn-b ui-btn-inline") Registrar         
       div(role="main", data-role="container")
         div(class="ui-body ui-body-a")
           form(method="POST", action="/", class="form-login")
             if messages.erro
-              br
               div(class="alert alert-danger")
-                each msg in messages.erro
-                  b= msg
-                  br
-                  br
+                p #{messages.erro}
+              br
             div(class="form-group")
               label E-mail:
               input(type="email", class="form-control", placeholder="E-mail", name="email", autofocus, required)
