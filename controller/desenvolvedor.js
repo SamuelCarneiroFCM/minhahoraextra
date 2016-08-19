@@ -1,6 +1,6 @@
 module.exports = function(app){
-	var validacao = require('../validacoes/desenvolvedor');
-	var validacaohora = require('../validacoes/Horaextra');
+	var validacao = require('../validacoes/desenvolvedor.js');
+	var validacaohora = require('../validacoes/horaextra.js');
 	var Desenvolvedor = app.esquemas.desenvolvedorModel;
 	var Horaextra = app.esquemas.horatrabalhadaModel;
 	var funcoes = require('../config/funcoes.js');
