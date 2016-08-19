@@ -13,16 +13,17 @@ module.exports = function(app){
 		},
 
 		listahoraextra: function(req, res){
-      console.log(res.url);
-
-			Horaextra.find({'email' : 'samuel.a.carneiro@gmail.com'},
+			var FILTROS = {
+	      email: req.param('email')
+	    };
+			console.log(FILTROS);
+			Horaextra.find(FILTROS,
 				function(err, dados) {
 					if(err){
 						req.flash('erro', 'Erro ao listar a hora extra' + err);
 						res.render('/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : 0});
 
 					}else{
-						console.log(dados);
 						res.render('home/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : dados});
 					}
 			});
