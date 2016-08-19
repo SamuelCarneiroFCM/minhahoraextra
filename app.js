@@ -57,5 +57,5 @@ app.use(erros.notfound);
 app.use(erros.serverError);
 
 app.listen(port, function(){
-  console.log('Aplicativo foi ativado => ', app.address().port);
+  console.log('Aplicativo foi ativado => ' + port);
 });
