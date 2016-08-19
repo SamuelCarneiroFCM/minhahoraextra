@@ -56,9 +56,6 @@ load('esquemas').then('controller').then('rotas').into(app);
 app.use(erros.notfound);
 app.use(erros.serverError);
 
-//app.listen(port);
-//console.log('Aplicativo foi ativado ' + port);
-
-app.listen(app.get('port'), function() {
-  console.log('Aplicativo foi ativado => ' + port);
+app.listen(port, function(){
+  console.log('Aplicativo foi ativado => ', app.address().port);
 });
