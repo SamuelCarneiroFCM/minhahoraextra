@@ -1,7 +1,6 @@
+var funcoes = require('../config/funcoes.js');
 
 module.exports = function(req, res){
-	var funcoes = require('../config/funcoes.js');
-
   req.assert('email', 'E-mail inválido.').isEmail();
 	req.assert('solicitacao', 'Informe uma solicitação.').notEmpty();
   req.assert('datainicial', 'Informe a data inicial.').notEmpty();
@@ -24,11 +23,12 @@ module.exports = function(req, res){
 
 	var validateErros = req.validationErrors() || [];
 
-	if(validacaoErros.length > 0){
-		validacaoErros.forEach(function(e){
+	if(validateErros.length > 0){
+		validateErros.forEach(function(e){
 			req.flash('erro', e.msg);
 		});
 		return false;
+	}else{
+		return true;
 	}
-	return true;
-};
+}
