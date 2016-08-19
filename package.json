@@ -1,6 +1,6 @@
 {
   "name": "minhahoraextra",
-  "version": "2.1.0",
+  "version": "0.2.5",
   "description": "Hora extra FCM",
   "engines": {
     "node": "5.9.1"
