@@ -1,12 +1,16 @@
 var funcoes = require('../config/funcoes.js');
 
 module.exports = function(req, res){
+
   req.assert('email', 'E-mail inválido.').isEmail();
 	req.assert('solicitacao', 'Informe uma solicitação.').notEmpty();
   req.assert('datainicial', 'Informe a data inicial.').notEmpty();
 	req.assert('horainicial', 'Informe a hora inicial.').notEmpty();
 	req.assert('datafinal', 'Informe a data final.').notEmpty();
 	req.assert('horafinal', 'Informe a hora final.').notEmpty();
+
+
+	var validateErros = req.validationErrors() || [];
 
 	var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
 		req.body.datafinal, req.body.horafinal);
@@ -20,8 +24,6 @@ module.exports = function(req, res){
 	if(req.body.senha != req.body.senha_confirmar){
 		validateErros.push({msg: 'Senha não confere.'});
 	}
-
-	var validateErros = req.validationErrors() || [];
 
 	if(validateErros.length > 0){
 		validateErros.forEach(function(e){
