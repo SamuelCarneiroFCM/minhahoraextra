@@ -13,11 +13,8 @@ module.exports = function(app){
 		},
 
 		listahoraextra: function(req, res){
-			var FILTROS = {
-	      email: req.param('email')
-	    };
-			console.log(FILTROS);
-			Horaextra.find(FILTROS,
+      var email = req.param('email');
+			Horaextra.find({email:email},
 				function(err, dados) {
 					if(err){
 						req.flash('erro', 'Erro ao listar a hora extra' + err);

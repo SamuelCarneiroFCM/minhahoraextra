@@ -3,7 +3,8 @@
   "version": "0.2.5",
   "description": "Hora extra FCM",
   "engines": {
-    "node": "5.9.1"
+    "npm": "~2.0.0",
+    "node": ">=0.10"    
   },
   "main": "app.js",
   "scripts": {
