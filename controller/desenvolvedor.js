@@ -26,6 +26,17 @@ module.exports = function(app){
 			});
 		},
 
+		editarhoraextra: function(req,res){
+			Horaextra.findById(req.params.id, function(err, dados){
+				if(err){
+					req.flash('erro', 'Erro ao editar: ' + err);
+					res.render('home/index', {dev : req.session.desenvolvedor});
+				}else{
+					res.render('home/edithoraextra', {hora: dados});
+				}
+			});
+		},
+
 		addhoraextra: function(req,res){
 
 			if(validacaohora(req, res)){
@@ -55,6 +66,36 @@ module.exports = function(app){
 			}
 			else{
 				res.render('home/addhoraextra', {dev : req.session.desenvolvedor});
+			}
+		},
+
+		updatehoraextra: function(req,res){
+			if(validacaohora(req,res)){
+				Horaextra.findById(req.params.id, function(err, dados){
+					var hora    = dados;
+					var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
+						req.body.datafinal, req.body.horafinal);
+
+					hora.email       = req.body.email;
+					hora.solicitacao = req.body.solicitacao;
+					hora.datainicial = req.body.datainicial;
+					hora.horainicial = req.body.horainicial;
+					hora.datafinal   = req.body.datafinal;
+					hora.horafinal   = req.body.horafinal;
+					hora.quantidadejornada = qtdhora;
+
+					hora.save(function(err){
+						if(err){
+							req.flash('erro', 'Erro ao atualizar: ' + err);
+							res.render('home/edithoraextra', {hora: hora});
+						}else{
+							req.flash('info', 'Registro atualizado com sucesso!');
+							res.render('home/index', {'dev': req.session.desenvolvedor});
+						}
+					});
+				});
+			}else{
+				res.render('home/edithoraextra', {hora: req.body});
 			}
 		},
 

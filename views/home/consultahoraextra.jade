@@ -34,7 +34,7 @@ block content
                     td #{moment(hora.datafinal).format('DD/MM/YYYY')}
                     td #{hora.horafinal}                          
                     td 
-                      a(href="#dialogo_editar" class="ui-btn ui-mini") Editar
+                      a(href="/horaextraatual/edit/#{hora._id}" class="ui-btn ui-mini") Editar
                       a(href="javascript: Excluir('#{hora._id}');" class="ui-btn ui-mini") Excluir
           else
             p Nenhuma hora extra adicionada!
@@ -60,20 +60,7 @@ block content
               label Data de final:
               input(type="date", data-clear-btn="true", name="datafinal")
           button(type="submit" class="btn btn-primary") Consultar
-          
-  #dialogo_editar(data-role="page" data-dialog="true")
-    div(data-role="header" data-theme="b")
-        h1 Dialogo
-    section(data-role="content" class="ui-content")
-      form(action="/horatrabalhadaatual" method="post")
-        h1 Deseja editar?
-        p Deseja editar a informação selecionada
-        br
-        div(class="form-group")
-          a(href="javascript: Editar('');" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-a") Editar
-          a(href="#" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-a") Cancelar
-      
-      
+            
 block scripts
   script(type="text/javascript").
     function Excluir(id){
@@ -85,29 +72,11 @@ block scripts
           type: 'POST',
           statusCode: {
           	200: function(data){
-          		alert(data);
+          		console.log(data);
           		window.location.reload();
           	},
           	400: function(data){
-          		alert(data);
-          	}
-          }
-      	});
-      }
-    };
-    function Editar(id){
-      if(id != ''){
-        $.ajax({
-          url: '/horaextraatual/editar/'+id,
-          dataType: 'json',
-          type: 'POST',
-          statusCode: {
-          	200: function(data){
-          		alert(data);
-          		window.location.reload();
-          	},
-          	400: function(data){
-          		alert(data);
+              console.log(data);
           	}
           }
       	});
