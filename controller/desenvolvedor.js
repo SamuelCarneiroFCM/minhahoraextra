@@ -28,6 +28,7 @@ module.exports = function(app){
 
 		editarhoraextra: function(req,res){
 			Horaextra.findById(req.params.id, function(err, dados){
+				console.log(dados);
 				if(err){
 					req.flash('erro', 'Erro ao editar: ' + err);
 					res.render('home/index', {dev : req.session.desenvolvedor});
