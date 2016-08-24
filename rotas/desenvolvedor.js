@@ -15,7 +15,7 @@ module.exports = function(app){
 	app.route('/listahoraextra')
 		.get(autenticar, desenvolvedor.listahoraextra);
 
-	app.route('/horaextraatual/edit/:id')
+	app.route('/edithoraextra/edit/:id')
 		.post(desenvolvedor.updatehoraextra);
 
 }

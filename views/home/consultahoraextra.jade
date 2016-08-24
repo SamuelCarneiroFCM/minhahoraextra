@@ -34,7 +34,7 @@ block content
                     td #{moment(hora.datafinal).format('DD/MM/YYYY')}
                     td #{hora.horafinal}                          
                     td 
-                      a(href="/horaextraatual/edit/#{hora._id}" class="ui-btn ui-mini") Editar
+                      a(href="/edithoraextra/#{hora._id}" class="ui-btn ui-mini") Editar
                       a(href="javascript: Excluir('#{hora._id}');" class="ui-btn ui-mini") Excluir
           else
             p Nenhuma hora extra adicionada!

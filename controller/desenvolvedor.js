@@ -59,7 +59,7 @@ module.exports = function(app){
 		},
 
 		updatehoraextra: function(req,res){
-			if(validacaohora(req,res)){
+			if(validacaohora(req, res)){
 				Horaextra.findById(req.params.id, function(err, dados){
 					var hora    = dados;
 					var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
@@ -79,7 +79,8 @@ module.exports = function(app){
 							res.render('home/edithoraextra', {hora: hora});
 						}else{
 							req.flash('info', 'Registro atualizado com sucesso!');
-							res.render('home/index', {'dev': req.session.desenvolvedor});
+//							res.render('home/index', {'dev': req.session.desenvolvedor});							
+							res.render('home/edithoraextra', {hora: req.body});
 						}
 					});
 				});
