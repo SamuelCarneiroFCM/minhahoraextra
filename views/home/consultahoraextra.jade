@@ -24,7 +24,8 @@ block content
                   th(data-priority="3") Hora Inicial
                   th(data-priority="4") Data Final
                   th(data-priority="5") Hora Final
-                  th(data-priority="6")
+                  th(data-priority="6") Qtd. Jornada
+                  th(data-priority="7")
               tbody                
                 each hora in listhoras
                   tr                      
@@ -33,6 +34,7 @@ block content
                     td #{hora.horainicial}           
                     td #{moment(hora.datafinal).format('DD/MM/YYYY')}
                     td #{hora.horafinal}                          
+                    td #{hora.quantidadejornada} hs 
                     td 
                       a(href="/edithoraextra/#{hora._id}" class="ui-btn ui-btn-inline") Editar
                       a(href="javascript: Excluir('#{hora._id}');" class="ui-btn ui-btn-inline") Excluir
