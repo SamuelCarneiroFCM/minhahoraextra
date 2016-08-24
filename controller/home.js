@@ -9,6 +9,20 @@ module.exports = function(app){
     	res.render('home/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : 0});
     },
 
+		editarhoraextra: function(req,res){
+			var id = req.param('id');
+			console.log(id);
+			Horaextra.findById(id, function(err, dados){
+				console.log(dados);
+				if(err){
+					req.flash('erro', 'Erro ao editar: ' + err);
+					res.render('home/index', {dev : req.session.desenvolvedor});
+				}else{
+					res.render('home/edithoraextra', {hora: dados});
+				}
+			});
+		},
+
 		addhoraextra: function(req,res){
     	res.render('home/addhoraextra', {'dev' : req.session.desenvolvedor});
     },
