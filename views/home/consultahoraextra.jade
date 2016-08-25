@@ -39,7 +39,7 @@ block content
                       a(href="/edithoraextra/#{hora._id}" class="ui-btn ui-btn-inline") Editar
                       a(href="javascript:Excluir('#{hora._id}');" class="ui-btn ui-btn-inline") Excluir
           else
-            p Nenhuma hora extra adicionada!
+            p Nenhuma hora extra listada!
                       
                                                                 
     div(data-role="footer", data-position="fixed")
@@ -57,10 +57,10 @@ block content
               input(type="text", data-clear-btn="true", name="solicitacao",  placeholder="ML-00001")
           div(class="form-group")
               label Data do início:
-              input(type="date", data-clear-btn="true", name="datainicial")                 
+              input(type="date", data-clear-btn="true", name="datainicial", value="#{moment(new Date()).format('YYYY-MM-DD')}")                 
           div(class="form-group")
               label Data de final:
-              input(type="date", data-clear-btn="true", name="datafinal")
+              input(type="date", data-clear-btn="true", name="datafinal", value ="#{moment(new Date()).format('YYYY-MM-DD')}")
           button(type="submit" class="btn btn-primary") Consultar
             
 block scripts

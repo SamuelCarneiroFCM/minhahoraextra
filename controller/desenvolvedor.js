@@ -13,8 +13,15 @@ module.exports = function(app){
 		},
 
 		listahoraextra: function(req, res){
-      var email = req.param('email');
-			Horaextra.find({email:email},
+      var email = req.query.email;
+      var datainicial = funcoes.DataEmISO(req.query.datainicial);
+      var filter = {
+         "email": email,
+				 
+				 "datainicial": datainicial
+			};
+			console.log(filter);
+			Horaextra.find(filter,
 				function(err, dados) {
 					if(err){
 						req.flash('erro', 'Erro ao listar a hora extra' + err);
@@ -35,9 +42,9 @@ module.exports = function(app){
 				var hora = {
 					email: req.body.email,
 					solicitacao: req.body.solicitacao,
-					datainicial: req.body.datainicial,
+					datainicial: funcoes.DataEmISO(req.body.datainicial),
 					horainicial: req.body.horainicial,
-					datafinal: req.body.datafinal,
+					datafinal: funcoes.DataEmISO(req.body.datafinal),
 					horafinal: req.body.horafinal,
 					quantidadejornada: qtdhora
 				};

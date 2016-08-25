@@ -37,7 +37,6 @@ module.exports = function(app){
 		},
 
 		autenticacao: function(req,res){
-			var emailUPPER = req.body.email;
 			var desenvolvedor  = new Desenvolvedor();
 			var email          = req.body.email;
 			var senha          = req.body.senha;
@@ -45,7 +44,7 @@ module.exports = function(app){
 			if(validacao(req, res)){
 				Desenvolvedor.findOne({'email': email}, function(err, data){
 					if(err){
-						req.flash('erro', 'Erro ao entrar no sistema: '+err);
+						req.flash('erro', 'Erro ao entrar no sistema: ' + err);
 						res.redirect('/');
 					}else if(!data){
 						req.flash('erro', 'E-mail não encontrado!');

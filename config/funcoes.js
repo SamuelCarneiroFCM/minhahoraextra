@@ -29,3 +29,16 @@ exports.qtdHora = function (datainicial, horainicial, datafinal, horafinal) {
   data2 = moment(data2, "DD/MM/YYYY hh:mm");
   return obterquantidadehora(data1, data2);
 };
+
+
+exports.DataEmISO = function (data) {
+  var datastr = new String(data);
+  if (datastr == ''){
+    datastr = '1989-12-31';
+  }
+  var anoini = datastr.substr(0, 4);
+  var mesini = datastr.substr(5, 2);
+  var diaini = datastr.substr(8, 2);
+  var datacorreta = new Date(anoini, mesini-1, diaini, 0, 0).toISOString();
+  return datacorreta;
+}
