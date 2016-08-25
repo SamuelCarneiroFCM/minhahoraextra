@@ -79,7 +79,6 @@ module.exports = function(app){
 							res.render('home/edithoraextra', {hora: hora});
 						}else{
 							req.flash('info', 'Registro atualizado com sucesso!');
-//							res.render('home/index', {'dev': req.session.desenvolvedor});							
 							res.render('home/edithoraextra', {hora: req.body});
 						}
 					});
@@ -87,6 +86,20 @@ module.exports = function(app){
 			}else{
 				res.render('home/edithoraextra', {hora: req.body});
 			}
+		},
+
+		excluirhoraextra: function(req, res){
+			console.log(req.params.id);
+			Horaextra.remove({_id: req.params.id}, function(err){
+				if(err){
+					req.flash('erro', 'Erro ao excluir: '+ err);
+					res.redirect('/listahoraextra');
+
+				}else{
+					req.flash('info', 'Registro excluído com sucesso!');
+					res.redirect('/listahoraextra');
+				}
+			});
 		},
 
 		post: function(req,res){

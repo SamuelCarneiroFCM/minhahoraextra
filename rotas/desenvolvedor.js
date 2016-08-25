@@ -18,4 +18,6 @@ module.exports = function(app){
 	app.route('/edithoraextra/edit/:id')
 		.post(desenvolvedor.updatehoraextra);
 
+  app.route('/horaextraatual/delete/:id')
+	  .post(desenvolvedor.excluirhoraextra);
 }

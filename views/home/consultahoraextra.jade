@@ -37,7 +37,7 @@ block content
                     td #{hora.quantidadejornada} hs 
                     td 
                       a(href="/edithoraextra/#{hora._id}" class="ui-btn ui-btn-inline") Editar
-                      a(href="javascript: Excluir('#{hora._id}');" class="ui-btn ui-btn-inline") Excluir
+                      a(href="javascript:Excluir('#{hora._id}');" class="ui-btn ui-btn-inline") Excluir
           else
             p Nenhuma hora extra adicionada!
                       
@@ -68,17 +68,16 @@ block scripts
     function Excluir(id){
       var pergunta = confirm('Deseja realmente excluir?');
       if(pergunta){
+        console.log(id);
         $.ajax({
           url: '/horaextraatual/delete/'+id,
           dataType: 'json',
           type: 'POST',
           statusCode: {
           	200: function(data){
-          		console.log(data);
           		window.location.reload();
           	},
           	400: function(data){
-              console.log(data);
           	}
           }
       	});

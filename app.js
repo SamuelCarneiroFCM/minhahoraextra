@@ -15,6 +15,14 @@ var express          = require('express'),
 mongoose.connect(URLdb.url, function(err){
 	if(err){
 		console.log("Erro ao conectar no mongodb: " + err);
+    mongoose.connect('mongodb://127.0.0.1:27017/horaextrafcm', function(local){
+      if(local){
+        console.log("Erro ao conectar banco local");
+      }
+        else{
+        console.log("Conexão com o banco local efetuada com sucesso!");
+      }
+    });
 	}else{
 		console.log("Conexão com o mongodb efetuada com sucesso!");
 	}
