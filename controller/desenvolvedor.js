@@ -12,21 +12,31 @@ module.exports = function(app){
 			  res.render('home/novo');
 		},
 
+		editarhoraextra: function(req,res){
+			Horaextra.findById(req.params.id, function(err, dados){
+				if(err){
+					req.flash('erro', 'Erro ao editar: ' + err);
+					res.render('home/index', {dev : req.session.desenvolvedor});
+				}else{
+					res.render('home/edithoraextra', {hora: dados});
+				}
+			});
+		},
+
 		listahoraextra: function(req, res){
       var email = req.query.email;
       var datainicial = funcoes.DataEmISO(req.query.datainicial);
+			var datafinal = funcoes.DataEmISO(req.query.datafinal);
       var filter = {
-         "email": email,
-				 
-				 "datainicial": datainicial
-			};
-			console.log(filter);
+				  "email": email,
+					'$or': [{"datainicial": {'$gte': datainicial}}, {"datafinal": {'$lte': datafinal}}]
+				};
+
 			Horaextra.find(filter,
 				function(err, dados) {
 					if(err){
 						req.flash('erro', 'Erro ao listar a hora extra' + err);
-						res.render('/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : 0});
-
+						res.render('/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : req.body});
 					}else{
 						res.render('home/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : dados});
 					}
@@ -56,7 +66,8 @@ module.exports = function(app){
 						req.flash('erro', 'Erro ao cadastrar a hora extra' + err);
 						res.render('home/addhoraextra', {dev : req.session.desenvolvedor});
 					}else{
-						res.render('home/index', {'dev': req.session.desenvolvedor});
+						req.flash('info', 'Registro cadastrado com sucesso!');
+						res.render('home/addhoraextra', {dev: req.session.desenvolvedor});
 					}
 				});
 			}
@@ -96,8 +107,9 @@ module.exports = function(app){
 		},
 
 		excluirhoraextra: function(req, res){
-			console.log(req.params.id);
-			Horaextra.remove({_id: req.params.id}, function(err){
+      console.log(req.query.id);
+
+			Horaextra.remove({_id: req.query.id}, function(err){
 				if(err){
 					req.flash('erro', 'Erro ao excluir: '+ err);
 					res.redirect('/listahoraextra');

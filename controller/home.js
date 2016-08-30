@@ -3,22 +3,21 @@ module.exports = function(app){
 	var Desenvolvedor = app.esquemas.desenvolvedorModel;
 	var Horaextra     = app.esquemas.horatrabalhadaModel;
 	var validacao     = require('../validacoes/autenticacao');
+	var moment        = require('moment');
 
 	var SistemaController = {
-		consultahoraextra: function(req,res){
-    	res.render('home/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : 0});
-    },
-
-		editarhoraextra: function(req,res){
-			Horaextra.findById(req.params.id, function(err, dados){
-				if(err){
-					req.flash('erro', 'Erro ao editar: ' + err);
-					res.render('home/index', {dev : req.session.desenvolvedor});
-				}else{
-					res.render('home/edithoraextra', {hora: dados});
-				}
+		consultahoraextra: function(req, res){
+			var dev = req.session.desenvolvedor;
+			Horaextra.find({'email': dev.email},
+				function(err, dados) {
+					if(err){
+						req.flash('erro', 'Erro ao listar a hora extra' + err);
+						res.render('/consultahoraextra', {dev : dev, listhoras : 0});
+					}else{
+						res.render('home/consultahoraextra', {dev : dev, listhoras : dados});
+					}
 			});
-		},
+    },
 
 		addhoraextra: function(req,res){
     	res.render('home/addhoraextra', {'dev' : req.session.desenvolvedor});
@@ -54,7 +53,8 @@ module.exports = function(app){
 						res.redirect('/');
 					}else{
 						req.session.desenvolvedor = data;
-						res.render('home/index', {'dev': data});
+						res.redirect('/home');						
+//						res.render('home/index', {'dev': data});
 					}
 				});
 			}else{

@@ -7,11 +7,9 @@ module.exports = function(app){
 		.get(home.login)
 		.post(home.autenticacao);
 
-	app.route('/home/novo').get(home.novo);
   app.route('/home').get(autenticar, home.index);
+	app.route('/home/novo').get(home.novo);
 	app.route('/logout').get(home.logout);
 	app.route('/addhoraextra').get(autenticar, home.addhoraextra);
 	app.route('/consultahoraextra').get(autenticar, home.consultahoraextra);
-	app.route('/edithoraextra/:id').get(autenticar, home.editarhoraextra);
-
 }
