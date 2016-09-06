@@ -15,7 +15,8 @@ block content
             p #{messages.info}
           br
         div(class="ui-body ui-body-a")  
-                                                                
+          div(class="chart_div")  
+          
     div(data-role="footer", data-position="fixed")
       h3 &copy; 2016 Samuel Carneiro
     div(data-role="panel" data-position-fixed="true" data-display="push" data-theme="a" id="nav-panel")
@@ -26,3 +27,24 @@ block content
           a(href="/addhoraextra") Adicionar
         li 
           a(href="/consultahoraextra") Consultar
+block scripts
+  script(type="text/javascript").
+    google.charts.load("current", {packages:["calendar"]});
+    google.charts.setOnLoadCallback(drawChart);       
+    function drawChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Slices');
+      data.addRows([
+        ['Mushrooms', 3],
+        ['Onions', 1],
+        ['Olives', 1],
+        ['Zucchini', 1],
+        ['Pepperoni', 2]
+      ]);
+      var options = {'title':'How Much Pizza I Ate Last Night',
+                     'width':400,
+                     'height':300};
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+       chart.draw(data, options);
+    };  

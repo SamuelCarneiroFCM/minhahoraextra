@@ -36,8 +36,8 @@ block content
                     td #{hora.horafinal}                          
                     td #{hora.quantidadejornada} hs 
                     td 
-                      a(href="/edithoraextra/#{hora._id}" class="ui-btn ui-btn-inline") Editar
-                      a(href="javascript:Excluir('#{hora._id}');" class="ui-btn ui-btn-inline") Excluir
+                      a(href="/edithoraextra/#{hora._id}" class="ui-btn ui-btn-inline ui-mini") Editar
+                      a(href="javascript:Excluir('#{hora._id}');" class="ui-btn ui-btn-inline ui-mini") Excluir
           else
             p Nenhuma hora extra listada!
                       
@@ -46,7 +46,7 @@ block content
       h3 &copy; 2016 Samuel Carneiro
       
     div(data-role="panel" data-position-fixed="true" data-display="push" data-theme="a" id="nav-panel")
-      div(data-role="controlgroup" data-mini="true")        
+      div(data-role="controlgroup" data-mini="true")     
         form(action="/listahoraextra" method="GET")
           div(class="form-group")
             label Email:

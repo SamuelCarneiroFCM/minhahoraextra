@@ -34,11 +34,13 @@ exports.qtdHora = function (datainicial, horainicial, datafinal, horafinal) {
 exports.DataEmISO = function (data) {
   var datastr = new String(data);
   if (datastr == ''){
-    datastr = '1989-12-31';
+    return null;
   }
-  var anoini = datastr.substr(0, 4);
-  var mesini = datastr.substr(5, 2);
-  var diaini = datastr.substr(8, 2);
-  var datacorreta = new Date(anoini, mesini-1, diaini, 0, 0).toISOString();
-  return datacorreta;
+  else{
+    var anoini = datastr.substr(0, 4);
+    var mesini = datastr.substr(5, 2);
+    var diaini = datastr.substr(8, 2);
+    var datacorreta = new Date(anoini, mesini-1, diaini, 0, 0).toISOString();
+    return datacorreta;
+ }
 }

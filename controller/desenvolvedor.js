@@ -25,22 +25,28 @@ module.exports = function(app){
 
 		listahoraextra: function(req, res){
       var email = req.query.email;
-      var datainicial = funcoes.DataEmISO(req.query.datainicial);
-			var datafinal = funcoes.DataEmISO(req.query.datafinal);
-      var filter = {
-				  "email": email,
-					'$or': [{"datainicial": {'$gte': datainicial}}, {"datafinal": {'$lte': datafinal}}]
-				};
+      var dataini = funcoes.DataEmISO(req.query.datainicial);
+			var datafim = funcoes.DataEmISO(req.query.datafinal);
 
-			Horaextra.find(filter,
-				function(err, dados) {
-					if(err){
-						req.flash('erro', 'Erro ao listar a hora extra' + err);
-						res.render('/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : req.body});
-					}else{
-						res.render('home/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : dados});
-					}
-			});
+      if(dataini == null || datafim == null){
+				req.flash('erro', 'Informe um período de data');
+				res.render('home/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : req.body});
+			}
+			else{
+	      var filter = {
+					  "email": email,
+						$or:[{"datainicial": {$gte: dataini, $lte: dataini}}, {"datafinal": {$gte: datafim, $lte: datafim}}]
+					};
+				Horaextra.find(filter,
+					function(err, dados) {
+						if(err){
+							req.flash('erro', 'Erro ao listar a hora extra' + err);
+							res.render('home/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : req.body});
+						}else{
+							res.render('home/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : dados});
+						}
+				});
+		 }
 		},
 
 		addhoraextra: function(req,res){
