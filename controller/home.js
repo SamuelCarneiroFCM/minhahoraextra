@@ -20,11 +20,11 @@ module.exports = function(app){
     },
 
 		addhoraextra: function(req,res){
-    	res.render('home/addhoraextra', {'dev' : req.session.desenvolvedor});
+    	res.render('home/addhoraextra', {dev : req.session.desenvolvedor});
     },
 
 		index: function(req, res){
-			res.render('home/index', {'dev': req.session.desenvolvedor});
+			res.render('home/index', {dev: req.session.desenvolvedor});
     },
 
 		novo: function(req,res){
@@ -53,7 +53,7 @@ module.exports = function(app){
 						res.redirect('/');
 					}else{
 						req.session.desenvolvedor = data;
-						res.render('home/index', {'dev': req.session.desenvolvedor});
+						res.redirect('/home');
 					}
 				});
 			}else{
