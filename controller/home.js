@@ -53,7 +53,7 @@ module.exports = function(app){
 						res.redirect('/');
 					}else{
 						req.session.desenvolvedor = data;
-						res.redirect('/home');
+						res.render('home/index', {'dev': req.session.desenvolvedor});
 					}
 				});
 			}else{

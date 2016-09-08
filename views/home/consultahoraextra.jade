@@ -36,8 +36,9 @@ block content
                     td #{hora.horafinal}                          
                     td #{hora.quantidadejornada} hs 
                     td 
-                      a(href="/edithoraextra/#{hora._id}" class="ui-btn ui-btn-inline ui-mini") Editar
-                      a(href="javascript:Excluir('#{hora._id}');" class="ui-btn ui-btn-inline ui-mini") Excluir
+                      form(method="GET", action="/edithoraextra", role="form", id="excluir-form")                  
+                        input(type="hidden", name="id", value="#{hora.id}")       
+                        button(type="submit", class="ui-btn ui-btn-inline ui-mini") Editar
           else
             p Nenhuma hora extra listada!
                       

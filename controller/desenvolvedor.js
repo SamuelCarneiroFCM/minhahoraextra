@@ -12,8 +12,8 @@ module.exports = function(app){
 			  res.render('home/novo');
 		},
 
-		editarhoraextra: function(req,res){
-			Horaextra.findById(req.params.id, function(err, dados){
+		editarhoraextra: function(req, res){
+			Horaextra.findById(req.query.id, function(err, dados){
 				if(err){
 					req.flash('erro', 'Erro ao editar: ' + err);
 					res.render('home/index', {dev : req.session.desenvolvedor});
@@ -83,8 +83,8 @@ module.exports = function(app){
 		},
 
 		updatehoraextra: function(req,res){
-			if(validacaohora(req, res)){
-				Horaextra.findById(req.params.id, function(err, dados){
+      if(validacaohora(req, res)){
+				Horaextra.findById(req.body.id, function(err, dados){
 					var hora    = dados;
 					var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
 						req.body.datafinal, req.body.horafinal);
