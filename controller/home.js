@@ -4,6 +4,8 @@ module.exports = function(app){
 	var Horaextra     = app.esquemas.horatrabalhadaModel;
 	var validacao     = require('../validacoes/autenticacao');
 	var moment        = require('moment');
+	const co = require('co');
+	const generate = require('node-chartist');
 
 	var SistemaController = {
 		consultahoraextra: function(req, res){
@@ -24,6 +26,17 @@ module.exports = function(app){
     },
 
 		index: function(req, res){
+			co(function * () {
+				  const options = {width: 400, height: 200};
+				  const data = {
+				    labels: ['a','b','c','d','e'],
+				    series: [
+				      [1, 2, 3, 4, 5],
+				      [3, 4, 5, 6, 7]
+				    ]
+				  };
+				  const bar = yield generate('bar', options, data); //=> chart HTML
+				});
 			res.render('home/index', {dev: req.session.desenvolvedor});
     },
 
