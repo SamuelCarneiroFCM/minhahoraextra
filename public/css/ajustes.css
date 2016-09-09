@@ -28,16 +28,20 @@
 }
 
 @media (max-width: 1200px)
-.x_title h2 {
+.x_title hx {
     width: 62%;
     font-size: 17px;
 }
 
-h2 {
+hx {
     font-size: 18px;
     font-weight: 400;
+    line-height: 1.1;
+    color: inherit;
 }
 
+.x_title hx small {
+  margin-left: 10px; }
 .tile {
     overflow: hidden;
 }
@@ -134,3 +138,49 @@ h2 {
 body .container.body .right_col {
     background: #F7F7F7;
 }
+
+@media (max-width: 991px) {
+  .nav-md .container.body .right_col, .nav-md .container.body .top_nav {
+    width: 100%;
+    margin: 0; }
+
+  .nav-md .container.body .col-md-3.left_col {
+    display: none; }
+
+  .nav-md .container.body .right_col {
+    width: 100%;
+    padding-right: 0; }
+
+  .right_col {
+    padding: 10px !important; } }
+@media (max-width: 1200px) {
+  .x_title hx {
+    width: 62%;
+    font-size: 17px; }
+
+  .tile, .graph {
+    zoom: 85%;
+    height: inherit; } }
+@media (max-width: 1270px) and (min-width: 192px) {
+  .x_title hx small {
+    display: none; } }
+
+h1, .h1, hx, .hx, h3, .h3 {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.top_tiles .tile hx {
+  font-size: 30px;
+  line-height: 30px;
+  margin: 3px 0 7px;
+  font-weight: bold; }
+
+.expand {
+  display: block;
+  text-decoration: none;
+  color: #555;
+  cursor: pointer; }
+
+.expand hx {
+  width: 85%;
+  float: left; }
