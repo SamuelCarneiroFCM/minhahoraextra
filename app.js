@@ -11,6 +11,7 @@ var express          = require('express'),
 	  expressValidator = require('express-validator'),
     URLdb            = require('./config/URLdb');
 
+
 //conexão com o mongodb
 mongoose.connect(URLdb.url, function(err){
 	if(err){
