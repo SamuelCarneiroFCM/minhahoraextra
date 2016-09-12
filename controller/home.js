@@ -4,8 +4,6 @@ module.exports = function(app){
 	var Horaextra     = app.esquemas.horatrabalhadaModel;
 	var validacao     = require('../validacoes/autenticacao');
 	var moment        = require('moment');
-	const co = require('co');
-	const generate = require('node-chartist');
 
 	var SistemaController = {
 		consultahoraextra: function(req, res){
@@ -21,22 +19,21 @@ module.exports = function(app){
 			});
     },
 
+    graficos: function(req,res){
+			var graficoanual =
+			 {
+				 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+				 series: [[5.22, 4, 3, 7, 5, 10, 3, 4, 8, 10, 15, 8]]
+			 }
+			var data = {graficoanual: graficoanual};
+			res.json(data);
+		},
+
 		addhoraextra: function(req,res){
     	res.render('home/addhoraextra', {dev : req.session.desenvolvedor});
     },
 
 		index: function(req, res){
-			co(function * () {
-				  const options = {width: 400, height: 200};
-				  const data = {
-				    labels: ['a','b','c','d','e'],
-				    series: [
-				      [1, 2, 3, 4, 5],
-				      [3, 4, 5, 6, 7]
-				    ]
-				  };
-				  const bar = yield generate('bar', options, data); //=> chart HTML
-				});
 			res.render('home/index', {dev: req.session.desenvolvedor});
     },
 
