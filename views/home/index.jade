@@ -44,10 +44,7 @@ block content
           a(href="/consultahoraextra") Consultar
 block scripts
   script.
-    var data = {
-      labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-      series: [[5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 30, 8]]
-    };
+    var data = {};  
     var options = {
       seriesBarDistance: 15
     };
@@ -61,5 +58,17 @@ block scripts
         }
       }]
     ];
-    new Chartist.Bar('.ct-chart', data, options, responsiveOptions);  
-  
+    var chartanual = new Chartist.Bar('.ct-chart', data, options, responsiveOptions);    
+    $.ajax({
+      url: '/graficos',
+      cache: false,      
+      dataType: 'json',
+      type: 'GET',
+      data: JSON.stringify(data),
+      statusCode: {
+        200: function(dados){
+          chartanual.update(dados.graficoanual);
+        }
+      }
+    }); 
+    

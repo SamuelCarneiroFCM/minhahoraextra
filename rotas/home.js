@@ -12,4 +12,5 @@ module.exports = function(app){
 	app.route('/logout').get(home.logout);
 	app.route('/addhoraextra').get(autenticar, home.addhoraextra);
 	app.route('/consultahoraextra').get(autenticar, home.consultahoraextra);
+	app.route('/graficos').get(autenticar, home.graficos);	
 }
