@@ -11,6 +11,25 @@ module.exports = function(app){
 		novo: function(req,res){
 			  res.render('home/novo');
 		},
+		
+		graficos: function(req,res){
+			var graficoanual =
+				 {
+					 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+					 series: [[5.22, 4, 3, 7, 5, 10, 3, 4, 8, 10, 15, 8]]
+				 }
+			 var graficosemanal =
+			   {
+			     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+			     series: [
+			       [1, 5, 2, 5, 4, 3],
+			       [2, 3, 4, 8, 1, 2],
+			       [5, 4, 3, 2, 1, 0.5]
+			     ]
+			   };
+			var data = {'graficoanual': graficoanual, 'graficosemanal': graficosemanal};
+			res.json(data);
+		},
 
 		editarhoraextra: function(req, res){
 			Horaextra.findById(req.query.id, function(err, dados){

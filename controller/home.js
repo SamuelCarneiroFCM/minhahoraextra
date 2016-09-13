@@ -18,17 +18,7 @@ module.exports = function(app){
 					}
 			});
     },
-
-    graficos: function(req,res){
-			var graficoanual =
-			 {
-				 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-				 series: [[5.22, 4, 3, 7, 5, 10, 3, 4, 8, 10, 15, 8]]
-			 }
-			var data = {graficoanual: graficoanual};
-			res.json(data);
-		},
-
+		
 		addhoraextra: function(req,res){
     	res.render('home/addhoraextra', {dev : req.session.desenvolvedor});
     },

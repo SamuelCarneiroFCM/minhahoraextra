@@ -15,6 +15,10 @@
 
 }
 
+.col-md_fixed{
+  width: 97.7%;
+}
+
 .x_title {
     border-bottom: 2px solid #E6E9ED;
     padding: 1px 5px 6px;
@@ -38,7 +42,9 @@ hx {
 }
 
 .x_title hx small {
-  margin-left: 10px; }
+  margin-left: 10px;
+}
+
 .tile {
     overflow: hidden;
 }
@@ -64,6 +70,9 @@ hx {
 }
 .col-xs-8 {
     width: 95%;
+}
+.col-xs-10 {
+    width: 97%;
 }
 .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
     float: left;

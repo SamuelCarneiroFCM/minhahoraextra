@@ -5,7 +5,7 @@ block content
         h1 Hora Extra
         a(href="#nav-panel" data-icon="bars" data-iconpos="notext" data-theme="b") Menu
         a(href="/logout" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power ui-btn-b") #{dev.nome}
-    div(class="right_col" data-role="main" class="ui-content")
+    div(data-role="main" class="ui-content")
         if messages.erro
           div(class="alert alert-danger")
             p #{messages.erro}
@@ -14,28 +14,25 @@ block content
           div(class="alert alert-success")
             p #{messages.info}
           br      
-        div(class="x_panel tile")  
-          div(class="ui-grid-a ui-responsive")          
-            div(class="ui-block-a")        
-              div(class="x_panel tile")                  
-                div(class="x_title") Gráfico de hora anual
-                div(class="ct-chart ct-golden-section", id="chartanual")
-            div(class="ui-block-b")        
-                div(class="ui-grid-a ui-responsive")              
-                  div(class="ui-block-a")        
-                    div(class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-8")
-                      div(class="tile-stats")            
-                        div(class="x_title") Total Anual                 
-                        div(class="count") R$: 179,00                  
-                  div(class="ui-block-b")        
-                    div(class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-8")
-                      div(class="tile-stats")
-                        div(class="x_title") Total semanal               
-                        div(class="count") R$: 85,00 
-                div(class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-8 col-md_fixed")                               
-                  div(class="x_panel tile")                              
-                    div(class="x_title") Gráfico de hora semanal
-                    div(class="ct-chart ct-perfect-fourth", id="chartsemanal")  
+        div(class="ui-grid-a ui-responsive")          
+          div(class="ui-block-a")        
+              div(class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-10")
+                div(class="tile-stats")            
+                  div(class="x_title") Total semanal                 
+                  div(class="count") R$: 80,00                  
+              div(class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-10")    
+                div(class="x_panel tile")                  
+                  div(class="x_title") Gráfico de hora semanal
+                  div(class="ct-chart ct-golden-section", id="chartsemanal")
+          div(class="ui-block-b")        
+              div(class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-10")
+                div(class="tile-stats")            
+                  div(class="x_title") Total Anual                 
+                  div(class="count") R$: 179,00                  
+              div(class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-10")   
+                div(class="x_panel tile")                              
+                  div(class="x_title") Gráfico de hora anual
+                  div(class="ct-chart ct-golden-section", id="chartanual")  
                                                                          
                         
     div(data-role="footer", data-position="fixed")
@@ -49,22 +46,8 @@ block content
         li 
           a(href="/consultahoraextra") Consultar
 block scripts
+  script(src="js/graficos.js")   
   script.
-    var data = {};  
-    var options = {
-      seriesBarDistance: 15
-    };
-    var responsiveOptions = [
-      ['screen and (max-width: 640px)', {
-        seriesBarDistance: 10,
-        axisX: {
-          labelInterpolationFnc: function (value) {
-            return value[0];
-          }
-        }
-      }]
-    ];
-    var chartanual = new Chartist.Bar('#chartanual', data, options, responsiveOptions);    
     $.ajax({
       url: '/graficos',
       cache: false,      
@@ -73,36 +56,10 @@ block scripts
       data: JSON.stringify(data),
       statusCode: {
         200: function(dados){
-          chartanual.update(dados.graficoanual);
+          chartanual.update(dados.graficoanual);          
+          chartsemanal.update(dados.graficosemanal);
         }
       }
     }); 
-  script.
-    var chartsemanal = new Chartist.Line('#chartsemanal', {
-      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      series: [
-        [1, 5, 2, 5, 4, 3],
-        [2, 3, 4, 8, 1, 2],
-        [5, 4, 3, 2, 1, 0.5]
-      ]
-    }, {
-      low: 0,
-      showArea: true,
-      showPoint: false,
-      fullWidth: true
-    });    
-    chartsemanal.on('draw', function(data) {
-      if(data.type === 'line' || data.type === 'area') {
-        data.element.animate({
-          d: {
-            begin: 2000 * data.index,
-            dur: 2000,
-            from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-            to: data.path.clone().stringify(),
-            easing: Chartist.Svg.Easing.easeOutQuint
-          }
-        });
-      }
-    });
     
     
