@@ -14,23 +14,29 @@ block content
           div(class="alert alert-success")
             p #{messages.info}
           br      
-        div(class="ui-grid-a ui-responsive")          
-          div(class="ui-block-a")        
-            div(class="x_panel tile")                  
-              div(class="x_title") Gráfico de hora anual
-              div(class="ct-chart ct-perfect-fourth")  
-          div(class="ui-block-b")        
-            div(class="")
-              div(class="ui-grid-a ui-responsive")              
-                div(class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12")
-                  div(class="tile-stats")            
-                    div(class="x_title") Total semanal                 
-                    div(class="count") R$: 179,00                  
-                div(class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12")
-                  div(class="tile-stats")
-                    div(class="x_title") Gráfico de hora anual               
-                    div(class="count") 179                  
-                    h3 Teste                                          
+        div(class="x_panel tile")  
+          div(class="ui-grid-a ui-responsive")          
+            div(class="ui-block-a")        
+              div(class="x_panel tile")                  
+                div(class="x_title") Gráfico de hora anual
+                div(class="ct-chart ct-golden-section", id="chartanual")
+            div(class="ui-block-b")        
+                div(class="ui-grid-a ui-responsive")              
+                  div(class="ui-block-a")        
+                    div(class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-8")
+                      div(class="tile-stats")            
+                        div(class="x_title") Total Anual                 
+                        div(class="count") R$: 179,00                  
+                  div(class="ui-block-b")        
+                    div(class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-8")
+                      div(class="tile-stats")
+                        div(class="x_title") Total semanal               
+                        div(class="count") R$: 85,00 
+                div(class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-8 col-md_fixed")                               
+                  div(class="x_panel tile")                              
+                    div(class="x_title") Gráfico de hora semanal
+                    div(class="ct-chart ct-perfect-fourth", id="chartsemanal")  
+                                                                         
                         
     div(data-role="footer", data-position="fixed")
       h3 &copy; 2016 Samuel Carneiro
@@ -58,7 +64,7 @@ block scripts
         }
       }]
     ];
-    var chartanual = new Chartist.Bar('.ct-chart', data, options, responsiveOptions);    
+    var chartanual = new Chartist.Bar('#chartanual', data, options, responsiveOptions);    
     $.ajax({
       url: '/graficos',
       cache: false,      
@@ -71,4 +77,32 @@ block scripts
         }
       }
     }); 
+  script.
+    var chartsemanal = new Chartist.Line('#chartsemanal', {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      series: [
+        [1, 5, 2, 5, 4, 3],
+        [2, 3, 4, 8, 1, 2],
+        [5, 4, 3, 2, 1, 0.5]
+      ]
+    }, {
+      low: 0,
+      showArea: true,
+      showPoint: false,
+      fullWidth: true
+    });    
+    chartsemanal.on('draw', function(data) {
+      if(data.type === 'line' || data.type === 'area') {
+        data.element.animate({
+          d: {
+            begin: 2000 * data.index,
+            dur: 2000,
+            from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+            to: data.path.clone().stringify(),
+            easing: Chartist.Svg.Easing.easeOutQuint
+          }
+        });
+      }
+    });
+    
     
