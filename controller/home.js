@@ -18,13 +18,15 @@ module.exports = function(app){
 					}
 			});
     },
-		
+
 		addhoraextra: function(req,res){
     	res.render('home/addhoraextra', {dev : req.session.desenvolvedor});
     },
 
 		index: function(req, res){
-			res.render('home/index', {dev: req.session.desenvolvedor});
+			var TotalAnual = "179.00";
+      var TotalSemanal = "85.00";
+			res.render('home/index', {dev: req.session.desenvolvedor, totais : {TotalAnual, TotalSemanal}});
     },
 
 		novo: function(req,res){

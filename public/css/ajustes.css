@@ -100,7 +100,7 @@ hx {
 .tile-stats {
     position: relative;
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 5px;
     border: 1px solid #E4E4E4;
     -webkit-border-radius: 5px;
     overflow: hidden;
@@ -126,14 +126,14 @@ hx {
     z-index: 1;
 }
 .tile-stats .count {
-    font-size: 38px;
+    font-size: 24px;
     font-weight: bold;
     line-height: 1.65857;
 }
 .tile-stats .count, .tile-stats h3, .tile-stats p {
     position: relative;
     margin: 0;
-    margin-left: 10px;
+    margin-left: 5px;
     z-index: 5;
     padding: 0;
 }
