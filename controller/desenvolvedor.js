@@ -11,7 +11,7 @@ module.exports = function(app){
 		novo: function(req,res){
 			  res.render('home/novo');
 		},
-		
+
 		graficos: function(req,res){
 			var graficoanual =
 				 {
@@ -20,18 +20,15 @@ module.exports = function(app){
 				 }
 			 var graficosemanal =
 			   {
-			     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-			     series: [
-			       [1, 5, 2, 5, 4, 3],
-			       [2, 3, 4, 8, 1, 2],
-			       [5, 4, 3, 2, 1, 0.5]
-			     ]
+			     labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+			     series: [[5, 4, 3, 2, 1, 0.5]]
 			   };
 			var data = {'graficoanual': graficoanual, 'graficosemanal': graficosemanal};
 			res.json(data);
 		},
 
 		editarhoraextra: function(req, res){
+			console.log(req.query.id);
 			Horaextra.findById(req.query.id, function(err, dados){
 				if(err){
 					req.flash('erro', 'Erro ao editar: ' + err);
@@ -101,7 +98,7 @@ module.exports = function(app){
 			}
 		},
 
-		updatehoraextra: function(req,res){
+		updatehoraextra: function(req, res){
       if(validacaohora(req, res)){
 				Horaextra.findById(req.body.id, function(err, dados){
 					var hora    = dados;
@@ -132,8 +129,6 @@ module.exports = function(app){
 		},
 
 		excluirhoraextra: function(req, res){
-      console.log(req.query.id);
-
 			Horaextra.remove({_id: req.query.id}, function(err){
 				if(err){
 					req.flash('erro', 'Erro ao excluir: '+ err);
@@ -156,7 +151,7 @@ module.exports = function(app){
 				esquema.horasemanal = req.body.horasemanal;
 				esquema.fator       = req.body.fator;
 
-				Desenvolvedor.findOne({'email': esquema.email}, function(err,data){
+				Desenvolvedor.findOne({'email': esquema.email}, function(err, data){
 					if(data){
 						req.flash('erro', 'E-mail encontra-se cadastrado, tente outro.');
 						res.render('home/novo', {'dev': data});
@@ -168,13 +163,14 @@ module.exports = function(app){
 							}else{
 								req.flash('info', 'Registro cadastrado com sucesso!');
 								req.session.desenvolvedor = esquema;
-								res.render('home/index', {'dev': esquema});
+								res.redirect('/home');
+								//res.render('home/index', {'dev': esquema});
 							}
 						});
 					}
 				});
 			}else{
-				res.render('home/novo', {'dev': esquema});
+				res.render('home/novo');
 			}
 		}
 	}

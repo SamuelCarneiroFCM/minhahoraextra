@@ -1,0 +1,597 @@
+.x_panel {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px 17px;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #E6E9ED;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+    opacity: 1;
+    transition: all .2s ease
+}
+.top_nav .nav .open>a,
+.top_nav .nav .open>a:focus,
+.top_nav .nav .open>a:hover {
+    background: #D9DEE4
+}
+.nav li.current-page {
+    background: rgba(255, 255, 255, 0.05)
+}
+.nav li li li.current-page {
+    background: none
+}
+.nav li li.current-page a {
+    color: #fff
+}
+
+.navbar-right {
+    margin-right: 0
+}
+.top_nav .navbar-right {
+    margin: 0;
+    width: 70%;
+    float: right
+}
+.top_nav .navbar-right li {
+    display: inline-block;
+    float: right;
+    position: static
+}
+@media (min-width: 480px) {
+    .top_nav .navbar-right li {
+        position: relative
+    }
+}
+.fontawesome-icon-list .fa-hover a:hover {
+    background-color: #ddd;
+    color: #fff;
+    text-decoration: none
+}
+.fontawesome-icon-list .fa-hover a {
+    display: block;
+    line-height: 32px;
+    height: 32px;
+    padding-left: 10px;
+    border-radius: 4px
+}
+.fontawesome-icon-list .fa-hover a:hover .fa {
+    font-size: 28px;
+    vertical-align: -6px
+}
+.top_nav .dropdown-menu li {
+    width: 100%
+}
+.top_nav .dropdown-menu li a {
+    width: 100%;
+    padding: 12px 20px
+}
+.dropdown-menu.msg_list span {
+    white-space: normal
+}
+.dropdown-menu {
+    border: medium none;
+    box-shadow: none;
+    display: none;
+    float: left;
+    font-size: 12px;
+    left: 0;
+    list-style: none outside none;
+    padding: 0;
+    position: absolute;
+    text-shadow: none;
+    top: 100%;
+    z-index: 9998;
+    border: 1px solid #D9DEE4;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0
+}
+.dropdown-menu>li>a {
+    color: #5A738E
+}
+.dropdown-menu a {
+    cursor: pointer
+}
+.cropper .docs-toggles>.dropdown {
+    margin-bottom: 10px
+}
+.cropper .docs-options .dropdown-menu {
+    width: 100%
+}
+.cropper .docs-options .dropdown-menu>li {
+    padding: 3px 20px
+}
+.cropper .docs-options .dropdown-menu>li:hover {
+    background-color: #f7f7f7
+}
+.cropper .docs-options .dropdown-menu>li>label {
+    display: block
+}
+.daterangepicker.dropdown-menu {
+    font-size: 13px;
+    padding: 0;
+    overflow: hidden
+}
+
+.navbar-nav .open .dropdown-menu {
+    position: absolute;
+    background: #fff;
+    margin-top: 0;
+    border: 1px solid #D9DEE4;
+    -webkit-box-shadow: none;
+    right: 0;
+    left: auto;
+    width: 220px
+}
+.navbar-nav .open .dropdown-menu.msg_list {
+    width: 300px
+}
+
+.fontawesome-icon-list .fa-hover a .fa {
+    width: 32px;
+    font-size: 16px;
+    display: inline-block;
+    text-align: right;
+    margin-right: 10px
+}
+.main_menu .fa {
+    width: 26px;
+    opacity: .99;
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+.btn.btn-app>.fa,
+
+.main_menu span.fa {
+    float: right;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 10px;
+    min-width: inherit;
+    color: #C4CFDA
+}
+.active a span.fa {
+    text-align: right !important;
+    margin-right: 4px
+}
+.nav-sm span.fa,
+.nav-sm .menu_section h3 {
+    display: none
+}
+
+.panel_toolbox {
+    float: right;
+    min-width: 70px
+}
+.panel_toolbox>li {
+    float: left;
+    cursor: pointer
+}
+.panel_toolbox>li>a {
+    padding: 5px;
+    color: #C5C7CB;
+    font-size: 14px
+}
+.panel_toolbox>li>a:hover {
+    background: #F5F7FA
+}
+.tile-stats {
+    position: relative;
+    display: block;
+    margin-bottom: 12px;
+    border: 1px solid #E4E4E4;
+    -webkit-border-radius: 5px;
+    overflow: hidden;
+    padding-bottom: 5px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 5px;
+    -moz-background-clip: padding;
+    border-radius: 5px;
+    background-clip: padding-box;
+    background: #FFF;
+    transition: all 300ms ease-in-out
+}
+.tile-stats:hover .icon i {
+    animation-name: tansformAnimation;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+    color: rgba(58, 58, 58, 0.41);
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    -webkit-animation-name: tansformAnimation;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-name: tansformAnimation;
+    -moz-animation-duration: .5s;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: forwards
+}
+.tile-stats .icon {
+    width: 20px;
+    height: 20px;
+    color: #BAB8B8;
+    position: absolute;
+    right: 53px;
+    top: 22px;
+    z-index: 1
+}
+.tile-stats .icon i {
+    margin: 0;
+    font-size: 60px;
+    line-height: 0;
+    vertical-align: bottom;
+    padding: 0
+}
+.tile-stats .count {
+    font-size: 38px;
+    font-weight: bold;
+    line-height: 1.65857
+}
+.tile-stats .count,
+.tile-stats h3,
+.tile-stats p {
+    position: relative;
+    margin: 0;
+    margin-left: 10px;
+    z-index: 5;
+    padding: 0
+}
+.tile-stats h3 {
+    color: #BAB8B8
+}
+.tile-stats p {
+    margin-top: 5px;
+    font-size: 12px
+}
+.tile-stats>.dash-box-footer {
+    position: relative;
+    text-align: center;
+    margin-top: 5px;
+    padding: 3px 0;
+    color: #fff;
+    color: rgba(255, 255, 255, 0.8);
+    display: block;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.1);
+    text-decoration: none
+}
+.tile-stats>.dash-box-footer:hover {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.15)
+}
+.tile-stats>.dash-box-footer:hover {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.15)
+}
+
+table.no-margin .progress {
+    margin-bottom: 0
+}
+@media (min-width: 192px) and (max-width: 1270px) {
+    table.tile_info span.right {
+        margin-right: 7px;
+        float: left
+    }
+}
+#integration-list {
+    width: 100%;
+    margin: 0 auto;
+    display: table
+}
+#right {
+    display: table
+}
+#sup {
+    display: table-cell;
+    vertical-align: middle;
+    width: 80%
+}
+table.tile h3,
+table.tile h4,
+table.tile span {
+    font-weight: bold;
+    vertical-align: middle !important
+}
+table.tile th,
+table.tile td {
+    text-align: center
+}
+table.tile th {
+    border-bottom: 1px solid #E6ECEE
+}
+table.tile td {
+    padding: 5px 0
+}
+table.tile td ul {
+    text-align: left;
+    padding-left: 0
+}
+table.tile td ul li {
+    list-style: none;
+    width: 100%
+}
+table.tile td ul li a {
+    width: 100%
+}
+table.tile td ul li a big {
+    right: 0;
+    float: right;
+    margin-right: 13px
+}
+table.tile_info {
+    width: 100%
+}
+table.tile_info td {
+    text-align: left;
+    padding: 1px;
+    font-size: 15px
+}
+table.tile_info td p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    line-height: 28px
+}
+table.tile_info td i {
+    margin-right: 8px;
+    font-size: 17px;
+    float: left;
+    width: 18px;
+    line-height: 28px
+}
+table.tile_info td:first-child {
+    width: 83%
+}
+table.countries_list {
+    width: 100%
+}
+table.countries_list td {
+    padding: 0 10px;
+    line-height: 30px;
+    border-top: 1px solid #eeeeee
+}
+table.jambo_table {
+    border: 1px solid rgba(221, 221, 221, 0.78)
+}
+table.jambo_table thead {
+    background: rgba(52, 73, 94, 0.94);
+    color: #ECF0F1
+}
+table.jambo_table tbody tr:hover td {
+    background: rgba(38, 185, 154, 0.07);
+    border-top: 1px solid rgba(38, 185, 154, 0.11);
+    border-bottom: 1px solid rgba(38, 185, 154, 0.11)
+}
+table.jambo_table tbody tr.selected {
+    background: rgba(38, 185, 154, 0.16)
+}
+table.jambo_table tbody tr.selected td {
+    border-top: 1px solid rgba(38, 185, 154, 0.4);
+    border-bottom: 1px solid rgba(38, 185, 154, 0.4)
+}
+table.dataTable th.focus,
+table.dataTable td.focus {
+    outline: 2px solid #1ABB9C !important;
+    outline-offset: -1px
+}
+table.display {
+    margin: 0 auto;
+    clear: both;
+    width: 100%
+}
+table.display thead th {
+    padding: 8px 18px 8px 10px;
+    border-bottom: 1px solid black;
+    font-weight: bold;
+    cursor: pointer
+}
+table.display tfoot th {
+    padding: 3px 18px 3px 10px;
+    border-top: 1px solid black;
+    font-weight: bold
+}
+table.display tr.heading2 td {
+    border-bottom: 1px solid #aaa
+}
+table.display td {
+    padding: 3px 10px
+}
+table.display td.center {
+    text-align: center
+}
+table.display thead th:active,
+table.display thead td:active {
+    outline: none
+}
+table.display tr.even.row_selected td {
+    background-color: #B0BED9
+}
+table.display tr.odd.row_selected td {
+    background-color: #9FAFD1
+}
+table.tile_info {
+    padding: 10px 15px
+}
+table.tile_info span.right {
+    margin-right: 0;
+    float: right;
+    position: absolute;
+    right: 4%
+}
+.daterangepicker.picker_1 table.table-condensed thead tr:first-child {
+    background: #1ABB9C
+}
+.daterangepicker table.table-condensed thead tr:first-child th {
+    line-height: 28px;
+    text-align: center
+}
+.daterangepicker.picker_1 table.table-condensed thead tr {
+    background: #213345
+}
+.daterangepicker table.table-condensed thead tr {
+    line-height: 14px
+}
+.daterangepicker table.table-condensed tbody tr:first-child td {
+    padding-top: 10px
+}
+.daterangepicker table.table-condensed th:first-child,
+.daterangepicker table.table-condensed td:first-child {
+    padding-left: 12px
+}
+.daterangepicker table.table-condensed th:last-child,
+.daterangepicker table.table-condensed td:last-child {
+    padding-right: 12px
+}
+.table-condensed>thead>tr>th,
+.table-condensed>tbody>tr>th,
+.table-condensed>tfoot>tr>th,
+.table-condensed>thead>tr>td,
+.table-condensed>tbody>tr>td,
+.table-condensed>tfoot>tr>td {
+    padding: 5px 7px;
+    text-align: center
+}
+.daterangepicker table.table-condensed tbody tr:last-child td {
+    padding-bottom: 10px
+}
+.daterangepicker.picker_2 table.table-condensed thead tr:first-child {
+    color: inherit
+}
+.daterangepicker.picker_2 table.table-condensed thead tr {
+    color: #1ABB9C
+}
+.daterangepicker.picker_3 table.table-condensed thead tr:first-child {
+    background: #1ABB9C;
+    color: #ECF0F1
+}
+.daterangepicker.picker_4 table.table-condensed tbody td {
+    background: #ECF0F1;
+    color: #34495E;
+    border: 1px solid #fff;
+    padding: 4px 7px
+}
+.daterangepicker.picker_4 table.table-condensed tbody td.active {
+    background: #536A7F;
+    color: #fff
+}
+.daterangepicker.picker_4 table.table-condensed thead tr:first-child {
+    background: #34495E;
+    color: #ECF0F1
+}
+.daterangepicker table {
+    width: 100%;
+    margin: 0
+}
+@media (max-width: 1200px) {
+    .x_title h2 {
+        width: 62%;
+        font-size: 17px
+    }
+    .tile,
+    .graph {
+        zoom: 85%;
+        height: inherit
+    }
+}
+@media (max-width: 1270px) and (min-width: 192px) {
+    .x_title h2 small {
+        display: none
+    }
+}
+.x_title {
+    border-bottom: 2px solid #E6E9ED;
+    padding: 1px 5px 6px;
+    margin-bottom: 10px
+}
+.x_title .filter {
+    width: 40%;
+    float: right
+}
+.x_title h2 {
+    margin: 5px 0 6px;
+    float: left;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}
+.x_title h2 small {
+    margin-left: 10px
+}
+.x_title span {
+    color: #BDBDBD
+}
+.dashboard_graph .x_title {
+    padding: 5px 5px 7px
+}
+.dashboard_graph .x_title h3 {
+    margin: 0;
+    font-weight: normal
+}
+
+.col-md-55,
+.col-xs-1,
+.col-sm-1,
+.col-md-1,
+.col-lg-1,
+.col-xs-2,
+.col-sm-2,
+.col-md-2,
+.col-lg-2,
+.col-xs-3,
+.col-sm-3,
+.col-md-3,
+.col-lg-3,
+.col-xs-4,
+.col-sm-4,
+.col-md-4,
+.col-lg-4,
+.col-xs-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5,
+.col-xs-6,
+.col-sm-6,
+.col-md-6,
+.col-lg-6,
+.col-xs-7,
+.col-sm-7,
+.col-md-7,
+.col-lg-7,
+.col-xs-8,
+.col-sm-8,
+.col-md-8,
+.col-lg-8,
+.col-xs-9,
+.col-sm-9,
+.col-md-9,
+.col-lg-9,
+.col-xs-10,
+.col-sm-10,
+.col-md-10,
+.col-lg-10,
+.col-xs-11,
+.col-sm-11,
+.col-md-11,
+.col-lg-11,
+.col-xs-12,
+.col-sm-12,
+.col-md-12,
+.col-lg-12 {
+    position: relative;
+    min-height: 1px;
+    float: left;
+    padding-right: 10px;
+    padding-left: 10px
+}

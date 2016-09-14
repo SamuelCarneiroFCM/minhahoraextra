@@ -4,7 +4,7 @@ var optionsSemanal =
    low: 0,
    showArea: true,
    showPoint: true,
-   fullWidth: false
+   fullWidth: true
   };
 
 var chartsemanal = new Chartist.Line('#chartsemanal', dados, optionsSemanal);
