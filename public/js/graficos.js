@@ -38,3 +38,8 @@ var responsiveOptions = [
   }]
 ];
 var chartanual = new Chartist.Bar('#chartanual', data, options, responsiveOptions);
+
+$.get( "/graficos", function( dados ) {
+  chartanual.update(dados.graficoanual);
+  chartsemanal.update(dados.graficosemanal);
+});

@@ -47,19 +47,4 @@ block content
           a(href="/consultahoraextra") Consultar
 block scripts
   script(src="js/graficos.js")   
-  script.
-    $.ajax({
-      url: '/graficos',
-      cache: false,      
-      dataType: 'json',
-      type: 'GET',
-      data: JSON.stringify(data),
-      statusCode: {
-        200: function(dados){
-          chartanual.update(dados.graficoanual);          
-          chartsemanal.update(dados.graficosemanal);
-        }
-      }
-    }); 
-    
     
