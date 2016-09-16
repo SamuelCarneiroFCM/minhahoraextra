@@ -39,16 +39,7 @@ var responsiveOptions = [
 ];
 var chartanual = new Chartist.Bar('#chartanual', data, options, responsiveOptions);
 
-$.ajax({
-  url: '/graficos',
-  cache: false,
-  dataType: 'json',
-  type: 'GET',
-  data: JSON.stringify(data),
-  statusCode: {
-    200: function(dados){
-      chartanual.update(dados.graficoanual);
-      chartsemanal.update(dados.graficosemanal);
-    }
-  }
-}); 
+$.get( "/graficos", function( dados ) {
+  chartanual.update(dados.graficoanual);
+  chartsemanal.update(dados.graficosemanal);
+});

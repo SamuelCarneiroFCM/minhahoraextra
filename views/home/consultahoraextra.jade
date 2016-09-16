@@ -1,6 +1,6 @@
 extends ../layout
 block content
-  #principal(data-role="page")
+  #fmconsulta(data-role="page")
     div(data-role="header", data-position="fixed")
         h1 Consulta Hora Extra
         a(href="#nav-panel" data-icon="bars" data-iconpos="notext" data-theme="b") Filtros        
@@ -36,7 +36,7 @@ block content
                     td #{hora.horafinal}                          
                     td #{hora.quantidadejornada} hs 
                     td 
-                      button(class="ui-btn ui-btn-inline ui-mini") Editar
+                      button#editarsolicitacao(class="confirm ui-btn ui-btn-inline ui-mini") Editar
                       button(class="ui-btn ui-btn-inline ui-mini") Excluir
                         
           else
@@ -45,6 +45,8 @@ block content
                                                                 
     div(data-role="footer", data-position="fixed")
       h3 &copy; 2016 Samuel Carneiro
+      
+    div#dialog(title="Editar" data-role="dialog") Deseja editar a solicitação
       
     div(data-role="panel" data-position-fixed="true" data-display="push" data-theme="a" id="nav-panel")
       div(data-role="controlgroup" data-mini="true")     
@@ -63,14 +65,7 @@ block content
               label Data de final:
               input(type="date", data-clear-btn="true", name="datafinal", value ="#{moment(new Date()).format('YYYY-MM-DD')}")
           button(type="submit" class="btn btn-primary") Consultar
-            
+
 block scripts
-  script(type="text/javascript").
-    function Excluir(id){
-      var pergunta = confirm('Deseja realmente excluir?');
-      if(pergunta){
-        window.location.href = "/horaextraatual/delete/" + id; 
-      } else {
-        event.preventDefault();
-      }
-    };
+  
+                      
