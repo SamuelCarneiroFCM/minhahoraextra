@@ -36,8 +36,7 @@ block content
                     td #{hora.horafinal}                          
                     td #{hora.quantidadejornada} hs 
                     td 
-                      button#editarsolicitacao(class="confirm ui-btn ui-btn-inline ui-mini") Editar
-                      button(class="ui-btn ui-btn-inline ui-mini") Excluir
+                      button(class="ui-btn ui-btn-inline ui-mini editar-hora-extra") Editar                      
                         
           else
             p Nenhuma hora extra listada!
@@ -67,5 +66,24 @@ block content
           button(type="submit" class="btn btn-primary") Consultar
 
 block scripts
+   script(type="text/javascript").
+     $('.editar-hora-extra').on('click', {descricao: 'Página inicial'}, function () {
+         $.confirm({
+             title: 'Deseja editar?',
+             content: ' ',
+             confirmButton: 'Confirmar',
+             icon: 'fa fa-question-circle',
+             animation: 'scale',
+             animationClose: 'top',
+             columnClass: 'col-md-4 col-md-offset-5',             
+             opacity: 0.5,
+             confirm: function () {
+                $.alert(descricao);
+             }
+         });
+     });
+
+     
+
   
                       
