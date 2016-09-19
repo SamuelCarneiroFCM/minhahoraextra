@@ -36,7 +36,10 @@ block content
                     td #{hora.horafinal}                          
                     td #{hora.quantidadejornada} hs 
                     td 
+                      input#id(type="hidden", name="id", value="#{hora.id}")        
+                      input#solicitacao(type="hidden", name="solicitacao", value="#{hora.solicitacao}")        
                       button(class="ui-btn ui-btn-inline ui-mini editar-hora-extra") Editar                      
+                      button(class="ui-btn ui-btn-inline ui-mini excluir-hora-extra") Excluir                      
                         
           else
             p Nenhuma hora extra listada!
@@ -67,18 +70,41 @@ block content
 
 block scripts
    script(type="text/javascript").
-     $('.editar-hora-extra').on('click', {descricao: 'Página inicial'}, function () {
+     var id = $("#id").val();
+     var solicitacao = $("#solicitacao").val();
+     $('.editar-hora-extra').on('click', function () {
          $.confirm({
-             title: 'Deseja editar?',
-             content: ' ',
+             title: 'Deseja alterar?',
+             content: solicitacao,
              confirmButton: 'Confirmar',
+             cancelButton: 'Cancelar',
+             confirmButtonClass: 'btn-info',
+             cancelButtonClass: 'btn-danger',             
              icon: 'fa fa-question-circle',
              animation: 'scale',
              animationClose: 'top',
              columnClass: 'col-md-4 col-md-offset-5',             
              opacity: 0.5,
              confirm: function () {
-                $.alert(descricao);
+                 alert(id);
+             }
+         });
+     });
+     $('.excluir-hora-extra').on('click', function () {
+         $.confirm({
+             title: 'Deseja excluir?',
+             content: solicitacao,
+             confirmButton: 'Confirmar',
+             cancelButton: 'Cancelar',
+             confirmButtonClass: 'btn-info',
+             cancelButtonClass: 'btn-danger',             
+             icon: 'fa fa-question-circle',
+             animation: 'scale',
+             animationClose: 'top',
+             columnClass: 'col-md-4 col-md-offset-5',             
+             opacity: 0.5,
+             confirm: function () {
+                 alert(id);
              }
          });
      });

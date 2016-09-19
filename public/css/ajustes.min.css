@@ -17,6 +17,9 @@
 .top_nav .nav .open>a:hover {
     background: #D9DEE4
 }
+a.btn-danger {
+    color: #fff
+}
 .nav li.current-page {
     background: rgba(255, 255, 255, 0.05)
 }
