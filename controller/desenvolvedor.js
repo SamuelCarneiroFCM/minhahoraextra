@@ -28,13 +28,13 @@ module.exports = function(app){
 		},
 
 		editarhoraextra: function(req, res){
-			console.log(req.query.id);
-			Horaextra.findById(req.query.id, function(err, dados){
+			Horaextra.findById(req.params.id, function(err, dados){
 				if(err){
 					req.flash('erro', 'Erro ao editar: ' + err);
 					res.render('home/index', {dev : req.session.desenvolvedor});
 				}else{
-					res.render('home/edithoraextra', {hora: dados});
+					console.log(dados);
+					res.render('editarhoraextra', {hora: dados});
 				}
 			});
 		},

@@ -86,7 +86,7 @@ block scripts
              columnClass: 'col-md-4 col-md-offset-5',             
              opacity: 0.5,
              confirm: function () {
-                 alert(id);
+               $.get("/editarhoraextra/" + id);
              }
          });
      });
