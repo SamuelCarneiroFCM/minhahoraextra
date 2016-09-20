@@ -47,9 +47,7 @@ block content
                                                                 
     div(data-role="footer", data-position="fixed")
       h3 &copy; 2016 Samuel Carneiro
-      
-    div#dialog(title="Editar" data-role="dialog") Deseja editar a solicitação
-      
+            
     div(data-role="panel" data-position-fixed="true" data-display="push" data-theme="a" id="nav-panel")
       div(data-role="controlgroup" data-mini="true")     
         form(action="/listahoraextra" method="GET")
@@ -67,6 +65,7 @@ block content
               label Data de final:
               input(type="date", data-clear-btn="true", name="datafinal", value ="#{moment(new Date()).format('YYYY-MM-DD')}")
           button(type="submit" class="btn btn-primary") Consultar
+          
 
 block scripts
    script(type="text/javascript").
@@ -86,7 +85,7 @@ block scripts
              columnClass: 'col-md-4 col-md-offset-5',             
              opacity: 0.5,
              confirm: function () {
-               $.get("/editarhoraextra/" + id);
+               location.href = '/editarhoraextra/' + id; 
              }
          });
      });

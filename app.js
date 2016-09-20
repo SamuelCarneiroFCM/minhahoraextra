@@ -30,7 +30,7 @@ mongoose.connect(URLdb.url, function(err){
 });
 
 var app = express();
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 4000;
 var erros = require("./mediador/erros");
 
 // view engine

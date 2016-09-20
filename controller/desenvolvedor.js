@@ -33,8 +33,7 @@ module.exports = function(app){
 					req.flash('erro', 'Erro ao editar: ' + err);
 					res.render('home/index', {dev : req.session.desenvolvedor});
 				}else{
-					console.log(dados);
-					res.render('editarhoraextra', {hora: dados});
+					res.render('home/editarhoraextra', {hora: dados});
 				}
 			});
 		},
