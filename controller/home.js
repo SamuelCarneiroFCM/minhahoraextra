@@ -1,32 +1,49 @@
 module.exports = function(app){
+//	const co          = require('co');
+//	const generate    = require('node-chartist');
 
-	var Desenvolvedor = app.esquemas.desenvolvedorModel;
-	var Horaextra     = app.esquemas.horatrabalhadaModel;
-	var validacao     = require('../validacoes/autenticacao');
-	var moment        = require('moment');
+	var Desenvolvedor = app.esquemas.desenvolvedorModel,
+	    Horaextra     = app.esquemas.horatrabalhadaModel,
+	    validacao     = require('../validacoes/autenticacao'),
+	    moment        = require('moment');
 
 	var SistemaController = {
+
 		consultahoraextra: function(req, res){
 			var dev = req.session.desenvolvedor;
 			Horaextra.find({'email': dev.email},
 				function(err, dados) {
 					if(err){
 						req.flash('erro', 'Erro ao listar a hora extra' + err);
-						res.render('/consultahoraextra', {dev : dev, listhoras : 0});
+						res.render('home/consultahoraextra', {listhoras : 0});
 					}else{
-						res.render('home/consultahoraextra', {dev : dev, listhoras : dados});
+						res.render('home/consultahoraextra', {listhoras : dados});
 					}
 			});
     },
 
 		addhoraextra: function(req,res){
-    	res.render('home/addhoraextra', {dev : req.session.desenvolvedor});
+    	res.render('home/addhoraextra');
     },
 
 		index: function(req, res){
+      /*
+		  var bar = {};
+			co(function * (bar) {
+			  const options = {width: 400, height: 200};
+			  const data = {
+			    labels: ['a','b','c','d','e'],
+			    series: [
+			      [1, 2, 3, 4, 5],
+			      [3, 4, 5, 6, 7]
+			    ]
+			  };
+			  bar = yield generate('bar', options, data); //=> chart HTML
+			});
+      */
 			var TotalAnual = "179.00";
       var TotalSemanal = "85.00";
-			res.render('home/index', {dev: req.session.desenvolvedor, totais : {TotalAnual, TotalSemanal}});
+			res.render('home/index', {totais : {TotalAnual, TotalSemanal}});
     },
 
 		novo: function(req,res){
@@ -69,7 +86,7 @@ module.exports = function(app){
 				  {req.flash('erro', 'Erro ao excluir: ' + err);
 			  };
 			});
-			res.render('home/index', {'dev': req.session.desenvolvedor});
+			res.redirect('home/index');
 		},
 
 		logout: function(req,res){

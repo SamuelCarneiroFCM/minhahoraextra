@@ -31,7 +31,7 @@ module.exports = function(app){
 			Horaextra.findById(req.params.id, function(err, dados){
 				if(err){
 					req.flash('erro', 'Erro ao editar: ' + err);
-					res.render('home/index', {dev : req.session.desenvolvedor});
+					res.redirect('home/index');
 				}else{
 					res.render('home/editarhoraextra', {hora: dados});
 				}
@@ -45,7 +45,7 @@ module.exports = function(app){
 
       if(dataini == null || datafim == null){
 				req.flash('erro', 'Informe um período de data');
-				res.render('home/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : req.body});
+				res.render('home/consultahoraextra', {listhoras : req.body});
 			}
 			else{
 	      var filter = {
@@ -56,9 +56,9 @@ module.exports = function(app){
 					function(err, dados) {
 						if(err){
 							req.flash('erro', 'Erro ao listar a hora extra' + err);
-							res.render('home/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : req.body});
+							res.render('home/consultahoraextra', {listhoras : req.body});
 						}else{
-							res.render('home/consultahoraextra', {'dev' : req.session.desenvolvedor, listhoras : dados});
+							res.render('home/consultahoraextra', {listhoras : dados});
 						}
 				});
 		 }
@@ -85,15 +85,15 @@ module.exports = function(app){
 				horas.save(function(err, result) {
 					if(err){
 						req.flash('erro', 'Erro ao cadastrar a hora extra' + err);
-						res.render('home/addhoraextra', {dev : req.session.desenvolvedor});
+						res.redirect('home/addhoraextra');
 					}else{
 						req.flash('info', 'Registro cadastrado com sucesso!');
-						res.render('home/addhoraextra', {dev: req.session.desenvolvedor});
+						res.redirect('home/addhoraextra');
 					}
 				});
 			}
 			else{
-				res.render('home/addhoraextra', {dev : req.session.desenvolvedor});
+				res.redirect('home/addhoraextra');
 			}
 		},
 
@@ -163,7 +163,6 @@ module.exports = function(app){
 								req.flash('info', 'Registro cadastrado com sucesso!');
 								req.session.desenvolvedor = esquema;
 								res.redirect('/home');
-								//res.render('home/index', {'dev': esquema});
 							}
 						});
 					}

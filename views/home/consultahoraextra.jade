@@ -5,7 +5,7 @@ block content
         h1 Consulta Hora Extra
         a(href="#nav-panel" data-icon="bars" data-iconpos="notext" data-theme="b") Filtros        
         a(href="/home" data-icon="back" data-iconpos="notext" class="ui-link ui-btn-right ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all ui-btn-b" data-role="button" role="button") Voltar      
-    div(role="main", data-role="container")
+    div(role="main", data-role="container", data-cache="false")
         if messages.erro
           div(class="alert alert-danger")
             p #{messages.erro}
@@ -53,8 +53,8 @@ block content
         form(action="/listahoraextra" method="GET")
           div(class="form-group")
             label Email:
-            input(type="email", name="e-mail", data-clear-btn="false", disabled="disabled", class="form-control", value="#{dev.email}")
-            input(type="hidden", name="email", value="#{dev.email}")        
+            input(type="email", name="e-mail", data-clear-btn="false", disabled="disabled", class="form-control", value="#{session.email}")
+            input(type="hidden", name="email", value="#{session.email}")        
           div(class="form-group")
               label Solicitação:
               input(type="text", data-clear-btn="true", name="solicitacao",  placeholder="ML-00001")

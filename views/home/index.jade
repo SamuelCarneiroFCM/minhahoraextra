@@ -4,8 +4,8 @@ block content
     div(data-role="header", data-position="fixed")
         h1 Hora Extra
         a(href="#nav-panel" data-icon="bars" data-iconpos="notext" data-theme="b") Menu
-        a(href="/logout" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power ui-btn-b") #{dev.nome}
-    div(data-role="main" class="ui-content")
+        a(href="/logout" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power ui-btn-b") #{session.nome}
+    div(data-role="main" class="ui-content", data-cache="false")
         if messages.erro
           div(class="alert alert-danger")
             p #{messages.erro}
@@ -24,7 +24,7 @@ block content
               br    
               div(class="ui-corner-all custom-corners")
                 div(class="ui-bar ui-bar-a")
-                  h3 Gráfico de hora semanal
+                  h3 Gráfico de hora semanal                    
                 div(class="ui-body ui-body-a")
                   div#chartsemanal(class="ct-chart ct-perfect-fourth")     
               br         
@@ -34,6 +34,7 @@ block content
                   h3 Total anual
                 div(class="ui-body ui-body-a")
                   div(class="count") #{totais.TotalAnual}
+                  div#teste
               br    
               div(class="ui-corner-all custom-corners")
                 div(class="ui-bar ui-bar-a")
@@ -48,9 +49,13 @@ block content
         li
           a(href="#" data-rel="close") Fechar menu
         li 
-          a(href="/addhoraextra") Adicionar
+          a(href="/addhoraextra") Lançamento
         li 
           a(href="/consultahoraextra") Consultar
+          
 block scripts
-  script(src="js/graficos.js")   
+  script(src="js/graficos.js")
+
+  
+     
     
