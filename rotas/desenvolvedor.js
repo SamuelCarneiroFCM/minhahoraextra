@@ -9,13 +9,16 @@ module.exports = function(app){
 	    .post(autenticar, desenvolvedor.adicionarhoraextra);
 
   //Consultar lançamento hora extra
-	app.route('/consultahoraextra').get(autenticar, desenvolvedor.consultahoraextra);
-	app.route('/filtrohoraextra').get(autenticar, desenvolvedor.filtrohoraextra);
+	app.route('/consultahoraextra')
+	    .get(autenticar, desenvolvedor.consultahoraextra);
+	app.route('/filtrohoraextra')
+	    .get(autenticar, desenvolvedor.filtrohoraextra);
 
   //Editar e exluir hora extra
 	app.route('/editar/:id')
 	    .get(autenticar, desenvolvedor.editarhoraextra)
 	    .post(autenticar, desenvolvedor.gravarhoraextra);
-  app.route('/excluir/:id').post(autenticar, desenvolvedor.excluirhoraextra);
+  app.route('/excluir/:id')
+        .post(autenticar, desenvolvedor.excluirhoraextra);
 
 }

@@ -35,7 +35,7 @@ module.exports = function(app){
 						res.render('horaextra/adicionar');
 					}else{
 						req.flash('info', 'Registro cadastrado com sucesso!');
-						res.redirect('/home');
+						res.redirect('/addhoraextra');
 					}
 				});
 			}
@@ -95,7 +95,7 @@ module.exports = function(app){
 		},
 
 		gravarhoraextra: function(req, res){
-      if(validacaohora(req, res)){
+    		if(validacaohora(req, res)){
 				Horaextra.findById(req.params.id, function(err, dados){
 					var hora    = dados;
 					var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
@@ -125,13 +125,13 @@ module.exports = function(app){
 		},
 
 		excluirhoraextra: function(req, res){
-			Horaextra.remove({_id: req.params.id}, function(err){
+			Horaextra.remove({'_id': req.params.id}, function(err, dados){
 				if(err){
 					req.flash('erro', 'Erro ao excluir: '+ err);
 					res.render('horaextra/consultar');
 				}else{
 					req.flash('info', 'Registro excluído com sucesso!');
-					res.render('horaextra/consultar');
+					res.render('horaextra/consultar', {listhoras : dados});
 				}
 			});
 		}
