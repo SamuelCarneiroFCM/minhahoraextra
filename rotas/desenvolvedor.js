@@ -3,14 +3,19 @@ module.exports = function(app){
 	var desenvolvedor = app.controller.desenvolvedor;
 	var autenticar = require('../mediador/autenticar');
 
-	app.route('/registro').get(desenvolvedor.novo);
-	app.route('/registro/novo').get(desenvolvedor.novo);
-	app.route('/listahoraextra').get(autenticar, desenvolvedor.listahoraextra);
-	app.route('/editarhoraextra/:id').get(autenticar, desenvolvedor.editarhoraextra);
-	app.route('/graficos').get(autenticar, desenvolvedor.graficos);
+  //Adicionar hora extra
+	app.route('/addhoraextra')
+	    .get(autenticar, desenvolvedor.addhoraextra)
+	    .post(autenticar, desenvolvedor.adicionarhoraextra);
 
-	app.route('/registro/novo').post(desenvolvedor.post);
-	app.route('/horastrabalhadas').post(autenticar, desenvolvedor.addhoraextra);
-	app.route('/editarhoraextra').post(autenticar, desenvolvedor.updatehoraextra);
-    app.route('/excluirhoraextra').post(autenticar, desenvolvedor.excluirhoraextra);
+  //Consultar lançamento hora extra
+	app.route('/consultahoraextra').get(autenticar, desenvolvedor.consultahoraextra);
+	app.route('/filtrohoraextra').get(autenticar, desenvolvedor.filtrohoraextra);
+
+  //Editar e exluir hora extra
+	app.route('/editar/:id')
+	    .get(autenticar, desenvolvedor.editarhoraextra)
+	    .post(autenticar, desenvolvedor.gravarhoraextra);
+  app.route('/excluir/:id').post(autenticar, desenvolvedor.excluirhoraextra);
+
 }

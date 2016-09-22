@@ -8,64 +8,11 @@ module.exports = function(app){
 
 	var DesenvolvedorController = {
 
-		novo: function(req,res){
-			  res.render('home/novo');
-		},
-
-		graficos: function(req,res){
-			var graficoanual =
-				 {
-					 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-					 series: [[5.22, 4, 3, 7, 5, 10, 3, 4, 8, 10, 15, 8]]
-				 }
-			 var graficosemanal =
-			   {
-			     labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-			     series: [[5, 4, 3, 2, 1, 0.5]]
-			   };
-			var data = {'graficoanual': graficoanual, 'graficosemanal': graficosemanal};
-			res.json(data);
-		},
-
-		editarhoraextra: function(req, res){
-			Horaextra.findById(req.params.id, function(err, dados){
-				if(err){
-					req.flash('erro', 'Erro ao editar: ' + err);
-					res.redirect('home/index');
-				}else{
-					res.render('home/editarhoraextra', {hora: dados});
-				}
-			});
-		},
-
-		listahoraextra: function(req, res){
-      var email = req.query.email;
-      var dataini = funcoes.DataEmISO(req.query.datainicial);
-			var datafim = funcoes.DataEmISO(req.query.datafinal);
-
-      if(dataini == null || datafim == null){
-				req.flash('erro', 'Informe um período de data');
-				res.render('home/consultahoraextra', {listhoras : req.body});
-			}
-			else{
-	      var filter = {
-					  "email": email,
-						$or:[{"datainicial": {$gte: dataini, $lte: dataini}}, {"datafinal": {$gte: datafim, $lte: datafim}}]
-					};
-				Horaextra.find(filter,
-					function(err, dados) {
-						if(err){
-							req.flash('erro', 'Erro ao listar a hora extra' + err);
-							res.render('home/consultahoraextra', {listhoras : req.body});
-						}else{
-							res.render('home/consultahoraextra', {listhoras : dados});
-						}
-				});
-		 }
-		},
-
 		addhoraextra: function(req,res){
+    	res.render('horaextra/adicionar');
+    },
 
+		adicionarhoraextra: function(req,res){
 			if(validacaohora(req, res)){
 				var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
 					req.body.datafinal, req.body.horafinal);
@@ -85,21 +32,71 @@ module.exports = function(app){
 				horas.save(function(err, result) {
 					if(err){
 						req.flash('erro', 'Erro ao cadastrar a hora extra' + err);
-						res.redirect('home/addhoraextra');
+						res.render('horaextra/adicionar');
 					}else{
 						req.flash('info', 'Registro cadastrado com sucesso!');
-						res.redirect('home/addhoraextra');
+						res.redirect('/home');
 					}
 				});
 			}
 			else{
-				res.redirect('home/addhoraextra');
+				res.render('horaextra/adicionar');
 			}
 		},
 
-		updatehoraextra: function(req, res){
+		consultahoraextra: function(req, res){
+			var dev = req.session.desenvolvedor;
+			Horaextra.find({'email': dev.email},
+				function(err, dados) {
+					if(err){
+						req.flash('erro', 'Erro ao localizar a hora extra' + err);
+						res.render('horaextra/consultar', {listhoras : 0});
+					}else{
+						res.render('horaextra/consultar', {listhoras : dados});
+					}
+			});
+    },
+
+		filtrohoraextra: function(req, res){
+      var email = req.query.email;
+      var dataini = funcoes.DataEmISO(req.query.datainicial);
+			var datafim = funcoes.DataEmISO(req.query.datafinal);
+
+      if(dataini == null || datafim == null){
+				req.flash('erro', 'Informe um período de data');
+				res.render('horaextra/consultar', {listhoras : req.body});
+			}
+			else{
+	      var filter = {
+					  "email": email,
+						$or:[{"datainicial": {$gte: dataini, $lte: dataini}}, {"datafinal": {$gte: datafim, $lte: datafim}}]
+					};
+				Horaextra.find(filter,
+					function(err, dados) {
+						if(err){
+							req.flash('erro', 'Erro ao listar a hora extra' + err);
+							res.render('horaextra/consultar', {listhoras : req.body});
+						}else{
+							res.render('horaextra/consultar', {listhoras : dados});
+						}
+				});
+		 }
+		},
+
+		editarhoraextra: function(req, res){
+			Horaextra.findById(req.params.id, function(err, dados){
+				if(err){
+					req.flash('erro', 'Erro ao editar: ' + err);
+					res.redirect('/horaextra/consultar');
+				}else{
+					res.render('horaextra/editar', {hora: dados});
+				}
+			});
+		},
+
+		gravarhoraextra: function(req, res){
       if(validacaohora(req, res)){
-				Horaextra.findById(req.body.id, function(err, dados){
+				Horaextra.findById(req.params.id, function(err, dados){
 					var hora    = dados;
 					var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
 						req.body.datafinal, req.body.horafinal);
@@ -115,62 +112,30 @@ module.exports = function(app){
 					hora.save(function(err){
 						if(err){
 							req.flash('erro', 'Erro ao atualizar: ' + err);
-							res.render('home/edithoraextra', {hora: hora});
+							res.render('horaextra/editar', {hora: hora});
 						}else{
 							req.flash('info', 'Registro atualizado com sucesso!');
-							res.render('home/edithoraextra', {hora: req.body});
+							res.render('horaextra/editar', {hora: req.body});
 						}
 					});
 				});
 			}else{
-				res.render('home/edithoraextra', {hora: req.body});
+				res.render('horaextra/editar', {hora: req.body});
 			}
 		},
 
 		excluirhoraextra: function(req, res){
-			Horaextra.remove({_id: req.query.id}, function(err){
+			Horaextra.remove({_id: req.params.id}, function(err){
 				if(err){
 					req.flash('erro', 'Erro ao excluir: '+ err);
-					res.redirect('/listahoraextra');
-
+					res.render('horaextra/consultar');
 				}else{
 					req.flash('info', 'Registro excluído com sucesso!');
-					res.redirect('/listahoraextra');
+					res.render('horaextra/consultar');
 				}
 			});
-		},
-
-		post: function(req,res){
-			if(validacao(req, res)){
-				var esquema         = new Desenvolvedor();
-				esquema.nome        = req.body.nome;
-				esquema.email       = req.body.email;
-				esquema.senha       = esquema.generateHash(req.body.senha);
-				esquema.salario     = req.body.salario;
-				esquema.horasemanal = req.body.horasemanal;
-				esquema.fator       = req.body.fator;
-
-				Desenvolvedor.findOne({'email': esquema.email}, function(err, data){
-					if(data){
-						req.flash('erro', 'E-mail encontra-se cadastrado, tente outro.');
-						res.render('home/novo', {'dev': data});
-					}else{
-						esquema.save(function(err){
-							if(err){
-								req.flash('erro', 'Erro ao cadastrar: ' + err);
-								res.render('home/novo');
-							}else{
-								req.flash('info', 'Registro cadastrado com sucesso!');
-								req.session.desenvolvedor = esquema;
-								res.redirect('/home');
-							}
-						});
-					}
-				});
-			}else{
-				res.render('home/novo');
-			}
 		}
+
 	}
 
 	return DesenvolvedorController;

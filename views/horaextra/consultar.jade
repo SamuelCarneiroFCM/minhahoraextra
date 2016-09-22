@@ -50,7 +50,7 @@ block content
             
     div(data-role="panel" data-position-fixed="true" data-display="push" data-theme="a" id="nav-panel")
       div(data-role="controlgroup" data-mini="true")     
-        form(action="/listahoraextra" method="GET")
+        form(action="/filtrohoraextra", method="GET")
           div(class="form-group")
             label Email:
             input(type="email", name="e-mail", data-clear-btn="false", disabled="disabled", class="form-control", value="#{session.email}")
@@ -85,7 +85,7 @@ block scripts
              columnClass: 'col-md-4 col-md-offset-5',             
              opacity: 0.5,
              confirm: function () {
-               location.href = '/editarhoraextra/' + id; 
+               location.href = '/editar/' + id; 
              }
          });
      });
@@ -103,7 +103,7 @@ block scripts
              columnClass: 'col-md-4 col-md-offset-5',             
              opacity: 0.5,
              confirm: function () {
-                 alert(id);
+                 $.post("/excluir/" + id);
              }
          });
      });

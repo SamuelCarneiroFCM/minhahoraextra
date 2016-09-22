@@ -11,7 +11,7 @@ module.exports = function(req, res){
 
 
 	var validateErros = req.validationErrors() || [];
-
+/*
 	var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
 		req.body.datafinal, req.body.horafinal);
 	var h = qtdhora.substr(0, qtdhora.indexOf(":"));
@@ -19,7 +19,7 @@ module.exports = function(req, res){
 	if ((h <= 0) == (m <= 0)) {
 	  validateErros.push({msg: 'Data e hora final não pode ser inferior ou igual a data e hora inicial.'});
 	}
-
+*/
 	//verificar se a senha confere
 	if(req.body.senha != req.body.senha_confirmar){
 		validateErros.push({msg: 'Senha não confere.'});
