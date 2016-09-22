@@ -12,5 +12,5 @@ module.exports = function(app){
 	app.route('/registro/novo').post(desenvolvedor.post);
 	app.route('/horastrabalhadas').post(autenticar, desenvolvedor.addhoraextra);
 	app.route('/editarhoraextra').post(autenticar, desenvolvedor.updatehoraextra);
-  app.route('/excluirhoraextra').post(autenticar, desenvolvedor.excluirhoraextra);
+    app.route('/excluirhoraextra').post(autenticar, desenvolvedor.excluirhoraextra);
 }
