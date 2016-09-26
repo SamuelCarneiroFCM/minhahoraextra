@@ -74,7 +74,7 @@ module.exports = function(app){
 				Horaextra.find(filter,
 					function(err, dados) {
 						if(err){
-							req.flash('erro', 'Erro ao listar a hora extra' + err);
+							req.flash('erro', 'Erro ao localizar a hora extra' + err);
 							res.render('horaextra/consultar', {listhoras : req.body});
 						}else{
 							res.render('horaextra/consultar', {listhoras : dados});

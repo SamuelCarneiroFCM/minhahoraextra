@@ -1,3 +1,4 @@
+
 .custom-corners .ui-bar {
   margin-right: 10px;
   -webkit-border-top-left-radius: inherit;
@@ -11,7 +12,7 @@
   -webkit-border-bottom-left-radius: inherit;
   border-bottom-left-radius: inherit;
   -webkit-border-bottom-right-radius: inherit;
-  border-bottom-right-radius: inherit;
+  border-bottom-right-radius: inherit;*/
 }
 
 a.btn-success, a.btn-primary, a.btn-warning, a.btn-danger {

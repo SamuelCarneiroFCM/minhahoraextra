@@ -18,6 +18,7 @@ module.exports = function(app){
 	app.route('/editar/:id')
 	    .get(autenticar, desenvolvedor.editarhoraextra)
 	    .post(autenticar, desenvolvedor.gravarhoraextra);
+
   app.route('/excluir/:id')
         .post(autenticar, desenvolvedor.excluirhoraextra);
 

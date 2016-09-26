@@ -8,7 +8,7 @@ module.exports = function(app){
 	    moment        = require('moment');
 
 	var SistemaController = {
-		
+
     //====================================================HOME==================
 		autenticacao: function(req, res){
 			var desenvolvedor  = new Desenvolvedor();
