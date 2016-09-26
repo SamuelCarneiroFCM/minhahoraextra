@@ -2,7 +2,7 @@ extends ../layout
 block content
   #fmconsulta(data-role="page")
     div(data-role="header", data-position="fixed")
-        h1 Consulta Hora Extra
+        h1 Consulta
         a(href="#nav-panel" data-icon="bars" data-iconpos="notext" data-theme="b") Filtros        
         a(href="/home" data-icon="back" data-iconpos="notext" class="ui-link ui-btn-right ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all ui-btn-b" data-role="button" role="button") Voltar      
     div(role="main", data-role="container", data-cache="false")
@@ -60,10 +60,10 @@ block content
               input(type="text", data-clear-btn="true", name="solicitacao",  placeholder="ML-00001")
           div(class="form-group")
               label Data do início:
-              input(type="date", data-clear-btn="true", name="datainicial", value="#{moment(new Date()).format('YYYY-MM-DD')}")                 
+              input(type="date", data-clear-btn="true", name="datainicial")                 
           div(class="form-group")
               label Data de final:
-              input(type="date", data-clear-btn="true", name="datafinal", value ="#{moment(new Date()).format('YYYY-MM-DD')}")
+              input(type="date", data-clear-btn="true", name="datafinal")
           button(type="submit" class="btn btn-primary") Consultar
           
 
@@ -104,7 +104,7 @@ block scripts
              opacity: 0.5,
              confirm: function () {
                  $.post('/excluir/' + id, function() {
-                    
+                    location.href = '/consultahoraextra';  
                  });
              }
          });

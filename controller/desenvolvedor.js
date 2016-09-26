@@ -1,9 +1,10 @@
 module.exports = function(app){
-	var validacao = require('../validacoes/desenvolvedor.js');
-	var validacaohora = require('../validacoes/horaextra.js');
-	var Desenvolvedor = app.esquemas.desenvolvedorModel;
-	var Horaextra = app.esquemas.horatrabalhadaModel;
-	var funcoes = require('../config/funcoes.js');
+	var validacao     = require('../validacoes/desenvolvedor.js'),
+	    validacaohora = require('../validacoes/horaextra.js'),
+	    Desenvolvedor = app.esquemas.desenvolvedorModel,
+	    Horaextra     = app.esquemas.horatrabalhadaModel,
+      moment        = require('moment'),
+	    funcoes       = require('../config/funcoes.js');
 
 
 	var DesenvolvedorController = {
@@ -46,7 +47,15 @@ module.exports = function(app){
 
 		consultahoraextra: function(req, res){
 			var dev = req.session.desenvolvedor;
-			Horaextra.find({'email': dev.email},
+			var email = dev.email;
+			var dataini = moment().subtract(20, 'days').calendar();
+			var datafim = moment().format('L');
+
+      var filter = {
+				  "email": email,
+					$or:[{"datainicial": {$gte: dataini, $lte: dataini}}, {"datafinal": {$gte: datafim, $lte: datafim}}]
+				};
+			Horaextra.find(filter,
 				function(err, dados) {
 					if(err){
 						req.flash('erro', 'Erro ao localizar a hora extra' + err);
@@ -59,28 +68,33 @@ module.exports = function(app){
 
 		filtrohoraextra: function(req, res){
       var email = req.query.email;
+			var solicitacao = req.query.solicitacao;
       var dataini = funcoes.DataEmISO(req.query.datainicial);
 			var datafim = funcoes.DataEmISO(req.query.datafinal);
 
-      if(dataini == null || datafim == null){
-				req.flash('erro', 'Informe um período de data');
-				res.render('horaextra/consultar', {listhoras : req.body});
+      if (solicitacao == ""){
+				solicitacao = {$ne: ""};
 			}
-			else{
-	      var filter = {
-					  "email": email,
-						$or:[{"datainicial": {$gte: dataini, $lte: dataini}}, {"datafinal": {$gte: datafim, $lte: datafim}}]
-					};
-				Horaextra.find(filter,
-					function(err, dados) {
-						if(err){
-							req.flash('erro', 'Erro ao localizar a hora extra' + err);
-							res.render('horaextra/consultar', {listhoras : req.body});
-						}else{
-							res.render('horaextra/consultar', {listhoras : dados});
-						}
-				});
-		 }
+			//Se tiver nulas as datas pego de 20 dias atrás
+      if(dataini == null || datafim == null){
+				var dataini = moment().subtract(20, 'days').calendar();
+				var datafim = moment().format('L');
+			};
+
+      var filter = {
+				  "email": email,
+					"solicitacao": solicitacao,
+					$or:[{"datainicial": {$gte: dataini, $lte: dataini}}, {"datafinal": {$gte: datafim, $lte: datafim}}]
+				};
+			Horaextra.find(filter,
+				function(err, dados) {
+					if(err){
+						req.flash('erro', 'Erro ao localizar a hora extra' + err);
+						res.render('horaextra/consultar', {listhoras : req.body});
+					}else{
+						res.render('horaextra/consultar', {listhoras : dados});
+					}
+			});
 		},
 
 		editarhoraextra: function(req, res){
