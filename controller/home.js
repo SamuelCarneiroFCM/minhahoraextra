@@ -67,7 +67,7 @@ module.exports = function(app){
 			});
       */
 			var TotalAnual = "179.00";
-      var TotalSemanal = "85.00";
+      var TotalSemanal = "100.00";
 			res.render('home/index', {totais : {TotalAnual, TotalSemanal}});
     },
 
