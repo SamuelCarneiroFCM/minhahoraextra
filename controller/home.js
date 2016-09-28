@@ -2,10 +2,11 @@ module.exports = function(app){
 //	const co          = require('co');
 //	const generate    = require('node-chartist');
 
-	var Desenvolvedor = app.esquemas.desenvolvedorModel,
-	    Horaextra     = app.esquemas.horatrabalhadaModel,
-	    validacao     = require('../validacoes/autenticacao'),
-	    moment        = require('moment');
+	var Desenvolvedor       = app.esquemas.desenvolvedorModel,
+	    Horaextra           = app.esquemas.horatrabalhadaModel,
+			HoraExtraGrafico    = app.esquemas.horaextragraficoModel,
+	    validacao           = require('../validacoes/autenticacao'),
+	    moment              = require('moment');
 
 	var SistemaController = {
 
@@ -37,17 +38,47 @@ module.exports = function(app){
 		},
 
 		graficos: function(req,res){
-			var graficoanual =
+			var dev = req.session.desenvolvedor;
+			var esquemagraficosessao = {};
+			HoraExtraGrafico.findOne({'email': dev.email}, function(err, data){
+				if(err){
+					req.flash('erro', 'Erro ao carregar gráfico: ' + err);
+				}
+				else{
+					if (data == null) {
+						var esquemagrafico = new HoraExtraGrafico();
+						esquemagrafico.email = dev.email;
+						esquemagrafico.semanaabreviada   = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+						esquemagrafico.totalpordiasemnal = [0, 0, 0, 0, 0, 0];
+						esquemagrafico.mensalabreviada   = ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+						esquemagrafico.totalpormensal    = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+						esquemagrafico.save(function(erro){
+						  if(erro)
+							{
+								 req.flash('erro', 'Erro ao carregar gráfico: ' + err);
+						  }
+							else
+							{
+								esquemagraficosessao = esquemagrafico;
+							}
+						 });
+					} else {
+						esquemagraficosessao = data;
+					}
+			  }
+			});
+
+			var graficomensal =
 				 {
-					 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-					 series: [[5.22, 4, 3, 7, 5, 10, 3, 4, 8, 10, 15, 8]]
+					 labels: esquemagraficosessao.totalpordiasemnal,
+					 series: esquemagraficosessao.totalpormensal
 				 }
 			 var graficosemanal =
 			   {
-			     labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-			     series: [[5, 4, 3, 2, 1, 0.5]]
+			     labels: esquemagraficosessao.semanaabreviada,
+			     series: esquemagraficosessao.totalpordiasemnal
 			   };
-			var data = {'graficoanual': graficoanual, 'graficosemanal': graficosemanal};
+			var data = {'graficomensal': graficomensal, 'graficosemanal': graficosemanal};
 			res.json(data);
 		},
 

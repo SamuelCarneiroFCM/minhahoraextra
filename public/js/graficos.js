@@ -40,10 +40,10 @@ var responsiveOptions = [
     }
   }]
 ];
-var chartanual = new Chartist.Bar('#chartanual', data, options, responsiveOptions);
+var chartmensal = new Chartist.Bar('#chartmensal', data, options, responsiveOptions);
 
 $.get( "/graficos", function( dados ) {
-  chartanual.update(dados.graficoanual);
+  chartmensal.update(dados.graficomensal);
   chartsemanal.update(dados.graficosemanal);
 });
 

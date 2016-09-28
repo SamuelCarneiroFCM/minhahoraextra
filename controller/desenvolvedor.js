@@ -3,6 +3,7 @@ module.exports = function(app){
 	    validacaohora = require('../validacoes/horaextra.js'),
 	    Desenvolvedor = app.esquemas.desenvolvedorModel,
 	    Horaextra     = app.esquemas.horatrabalhadaModel,
+			HoraExtraGrafico    = app.esquemas.horaextragraficoModel,			
       moment        = require('moment'),
 	    funcoes       = require('../config/funcoes.js');
 

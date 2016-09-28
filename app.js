@@ -54,7 +54,7 @@ app.use(flash());
 
 app.use(function(req, res, next){
 	res.locals.session  = req.session.desenvolvedor;
-	res.locals.isLogged = req.session.desenvolvedor? true : false;
+	res.locals.taLogado = req.session.desenvolvedor? true : false;
 	res.locals.moment   = moment;
 	next();
 });
