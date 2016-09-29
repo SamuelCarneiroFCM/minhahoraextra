@@ -26,6 +26,7 @@
     "moment": "^2.14.1",
     "mongoose": "^4.5.9",
     "morgan": "^1.7.0",
+    "mpromise": "^0.5.5",
     "node-chartist": "^0.2.7",
     "nodemailer": "^2.5.0"
   },

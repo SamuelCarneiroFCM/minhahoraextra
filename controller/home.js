@@ -1,7 +1,4 @@
 module.exports = function(app){
-//	const co          = require('co');
-//	const generate    = require('node-chartist');
-
 	var Desenvolvedor       = app.esquemas.desenvolvedorModel,
 	    Horaextra           = app.esquemas.horatrabalhadaModel,
 			HoraExtraGrafico    = app.esquemas.horaextragraficoModel,
@@ -39,7 +36,6 @@ module.exports = function(app){
 
 		graficos: function(req,res){
 			var dev = req.session.desenvolvedor;
-			var esquemagraficosessao = {};
 			HoraExtraGrafico.findOne({'email': dev.email}, function(err, data){
 				if(err){
 					req.flash('erro', 'Erro ao carregar gráfico: ' + err);
@@ -48,55 +44,33 @@ module.exports = function(app){
 					if (data == null) {
 						var esquemagrafico = new HoraExtraGrafico();
 						esquemagrafico.email = dev.email;
-						esquemagrafico.semanaabreviada   = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-						esquemagrafico.totalpordiasemnal = [0, 0, 0, 0, 0, 0];
+						esquemagrafico.semanalabreviada   = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+						esquemagrafico.totalpordiasemanal = [0, 0, 0, 0, 0, 0];
+            esquemagrafico.valorpordiasemanal = [0, 0, 0, 0, 0, 0];
 						esquemagrafico.mensalabreviada   = ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 						esquemagrafico.totalpormensal    = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+						esquemagrafico.valorpormensal    = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 						esquemagrafico.save(function(erro){
 						  if(erro)
 							{
 								 req.flash('erro', 'Erro ao carregar gráfico: ' + err);
 						  }
-							else
-							{
-								esquemagraficosessao = esquemagrafico;
-							}
 						 });
+						 res.json({
+									'graficomensal': {labels: esquemagrafico.mensalabreviada, series: [esquemagrafico.totalpormensal]},
+									'graficosemanal': {labels: esquemagrafico.semanalabreviada, series: [esquemagrafico.totalpordiasemanal]}
+								});
 					} else {
-						esquemagraficosessao = data;
+   						res.json({
+								 'graficomensal': {labels: data.mensalabreviada, series: [data.totalpormensal]},
+								 'graficosemanal': {labels: data.semanalabreviada, series: [data.totalpordiasemanal]}
+							 });
 					}
 			  }
 			});
-
-			var graficomensal =
-				 {
-					 labels: esquemagraficosessao.totalpordiasemnal,
-					 series: esquemagraficosessao.totalpormensal
-				 }
-			 var graficosemanal =
-			   {
-			     labels: esquemagraficosessao.semanaabreviada,
-			     series: esquemagraficosessao.totalpordiasemnal
-			   };
-			var data = {'graficomensal': graficomensal, 'graficosemanal': graficosemanal};
-			res.json(data);
 		},
 
 		index: function(req, res){
-      /*
-		  var bar = {};
-			co(function * (bar) {
-			  const options = {width: 400, height: 200};
-			  const data = {
-			    labels: ['a','b','c','d','e'],
-			    series: [
-			      [1, 2, 3, 4, 5],
-			      [3, 4, 5, 6, 7]
-			    ]
-			  };
-			  bar = yield generate('bar', options, data); //=> chart HTML
-			});
-      */
 			var TotalAnual = "179.00";
       var TotalSemanal = "100.00";
 			res.render('home/index', {totais : {TotalAnual, TotalSemanal}});

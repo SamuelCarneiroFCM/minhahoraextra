@@ -1,4 +1,4 @@
-exports.notfound = function(req,res,next){
+exports.notfound = function(req, res, next){
 	res.status(404);
 	res.render('not-found');
 };

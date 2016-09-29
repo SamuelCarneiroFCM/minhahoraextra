@@ -1,11 +1,11 @@
 module.exports = function(app){
-	var validacao     = require('../validacoes/desenvolvedor.js'),
-	    validacaohora = require('../validacoes/horaextra.js'),
-	    Desenvolvedor = app.esquemas.desenvolvedorModel,
-	    Horaextra     = app.esquemas.horatrabalhadaModel,
-			HoraExtraGrafico    = app.esquemas.horaextragraficoModel,			
-      moment        = require('moment'),
-	    funcoes       = require('../config/funcoes.js');
+	var validacao         = require('../validacoes/desenvolvedor.js'),
+	    validacaohora     = require('../validacoes/horaextra.js'),
+	    Desenvolvedor     = app.esquemas.desenvolvedorModel,
+	    Horaextra         = app.esquemas.horatrabalhadaModel,
+			HoraExtraGrafico  = app.esquemas.horaextragraficoModel,
+      moment            = require('moment'),
+	    funcoes           = require('../config/funcoes.js');
 
 
 	var DesenvolvedorController = {
@@ -31,11 +31,18 @@ module.exports = function(app){
 
 				var horas = new Horaextra(hora);
 
-				horas.save(function(err, result) {
+				horas.save(function(err, hora) {
 					if(err){
 						req.flash('erro', 'Erro ao cadastrar a hora extra' + err);
 						res.render('horaextra/adicionar');
 					}else{
+						var DiaDeSemanaValido = moment(hora.datafinal).weekday();
+            HoraExtraGrafico.findOneAndUpdate({'email': hora.email}, {$set: {"totalpordiasemnal.0": 15}}, function(erro, grafico){
+              if(erro){
+								req.flash('erro', 'Erro ao atualizar o gráfico' + erro);
+							}else{
+							}
+						});
 						req.flash('info', 'Registro cadastrado com sucesso!');
 						res.redirect('/addhoraextra');
 					}
@@ -126,10 +133,10 @@ module.exports = function(app){
 
 					hora.save(function(err){
 						if(err){
-							req.flash('erro', 'Erro ao atualizar: ' + err);
+							req.flash('erro', 'Erro ao gravar: ' + err);
 							res.render('horaextra/editar', {hora: hora});
 						}else{
-							req.flash('info', 'Registro atualizado com sucesso!');
+							req.flash('info', 'Registro gravado com sucesso!');
 							res.render('horaextra/editar', {hora: req.body});
 						}
 					});

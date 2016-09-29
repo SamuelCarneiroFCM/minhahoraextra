@@ -5,11 +5,13 @@ module.exports = function(){
 	var horaextragraficoSchema = mongoose.Schema(
     {
 			email : {type: String, trim: true, unique: true, index: true},
-		  semanaabreviada : [],
-		  totalpordiasemnal: [],
+		  semanalabreviada : [],
+		  totalpordiasemanal: [],
+			valorpordiasemanal: [],
 			mensalabreviada : [],
-      totalpormensal: []
+      totalpormensal: [],
+			valorpormensal: []
 	  }, {collection: 'horaextragrafico'});
 
 	return mongoose.model('horaextragrafico', horaextragraficoSchema);
-}
+};
