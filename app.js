@@ -33,6 +33,7 @@ var app = express();
 var port = process.env.PORT || 4000;
 var erros = require("./mediador/erros");
 
+moment.locale('pt-BR');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('view options', {layout: true});

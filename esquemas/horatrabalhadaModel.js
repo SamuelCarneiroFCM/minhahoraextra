@@ -5,9 +5,9 @@ module.exports = function(){
 	var horatrabalhadaSchema = mongoose.Schema({
 		 email    : {type: String, trim: true, required: true},
 		 solicitacao: {type: String, required: true},
-		 datainicial: {type: Date, required: true},
+		 datainicial: {type: String, required: true},
 	   horainicial: {type: String, required: true},
-	   datafinal: {type: Date, required: true},
+	   datafinal: {type: String, required: true},
 	   horafinal: {type: String, required: true},
 		 quantidadejornada: {type: String, required: true},
 		 data_cad : {type: Date, default: Date.now}
