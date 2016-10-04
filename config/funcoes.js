@@ -22,7 +22,7 @@ exports.qtdHora = function (datainicial, horainicial, datafinal, horafinal) {
       var diffInMinutes = dateTwo.diff(dateOne, 'minutes'),
           diffInHours = Math.floor(diffInMinutes / 60); // desconsiderando casas decimais
       diffInMinutes = diffInMinutes - (60 * diffInHours);
-      return diffInHours + ':' + diffInMinutes;
+      return diffInHours + '.' + diffInMinutes;
   };
 
   data1 = moment(data1, "DD/MM/YYYY hh:mm");
@@ -43,4 +43,31 @@ exports.DataEmISO = function (data) {
     var datacorreta = new Date(anoini, mesini-1, diaini, 0, 0).toISOString();
     return datacorreta;
  }
-}
+};
+
+exports.UpdateDiaSemanalAtual = function(QtdJornada){
+  var up;
+  switch (new Date().getDay()) {
+      case 0:
+          up = {$set: {"totalpordiasemanal.0": parseFloat(QtdJornada)}};
+          break;
+      case 1:
+          up = {$set: {"totalpordiasemanal.1": parseFloat(QtdJornada)}};
+          break;
+      case 2:
+          up = {$set: {"totalpordiasemanal.2": parseFloat(QtdJornada)}};
+          break;
+      case 3:
+          up = {$set: {"totalpordiasemanal.3": parseFloat(QtdJornada)}};
+          break;
+      case 4:
+          up = {$set: {"totalpordiasemanal.4": parseFloat(QtdJornada)}};
+          break;
+      case 5:
+          up = {$set: {"totalpordiasemanal.5": parseFloat(QtdJornada)}};
+          break;
+      case  6:
+          up = {$set: {"totalpordiasemanal.6": parseFloat(QtdJornada)}};
+  };
+  return up;
+};

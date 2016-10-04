@@ -9,47 +9,49 @@ module.exports = function(app){
 
 
 	var DesenvolvedorController = {
-		addhoraextra: function(req,res){
+		addhoraextra: function(req, res){
     	res.render('horaextra/adicionar');
     },
 
-		adicionarhoraextra: function(req,res){
+		adicionarhoraextra: function(req, res){
 			if(validacaohora(req, res)){
-				var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
-					req.body.datafinal, req.body.horafinal);
+					var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial, req.body.datafinal, req.body.horafinal);
 
-				var hora = {
-					email: req.body.email,
-					solicitacao: req.body.solicitacao,
-					datainicial: moment(req.body.datainicial).format('L'),
-					horainicial: req.body.horainicial,
-					datafinal: moment(req.body.datafinal).format('L'),
-					horafinal: req.body.horafinal,
-					quantidadejornada: qtdhora
-				};
-
-				var horas = new Horaextra(hora);
-				horas.save(function(err, hora) {
-					if(err){
-						req.flash('erro', 'Erro ao cadastrar a hora extra' + err);
-						res.render('horaextra/adicionar');
-					}else{
-						/*
-						var DiaDeSemanaValido = moment(hora.datafinal).weekday();
-            HoraExtraGrafico.findOneAndUpdate({'email': hora.email}, {$set: {"totalpordiasemnal.2": 15}}, function(erro, grafico){
-              if(erro){
-								req.flash('erro', 'Erro ao atualizar o gráfico' + erro);
-							}else{
+					var hora = {
+							email: req.body.email,
+							solicitacao: req.body.solicitacao,
+							datainicial: moment(req.body.datainicial).format('L'),
+							horainicial: req.body.horainicial,
+							datafinal: moment(req.body.datafinal).format('L'),
+							horafinal: req.body.horafinal,
+							quantidadejornada: qtdhora
+					};
+					var horas = new Horaextra(hora);
+					horas.save(function(erro, hora) {
+							if(erro)
+							{
+								req.flash('erro', 'Erro ao cadastrar a hora extra' + erro);
+								res.render('horaextra/adicionar');
 							}
-						});
-						*/
-						req.flash('info', 'Registro cadastrado com sucesso!');
-						res.redirect('/addhoraextra');
-					}
-				});
-			}
-			else{
-				res.render('horaextra/adicionar');
+							else
+							{
+								var data1 = new Date(hora.datafinal);
+								var data2 = moment().subtract(7, 'days')._d;
+								var AtualizarGF = (moment(data1).isBefore(data2));
+				        if(AtualizarGF){
+								  var	UpdateDiaSemanal = funcoes.UpdateDiaSemanalAtual(qtdhora);
+									HoraExtraGrafico.findOneAndUpdate({'email': hora.email}, UpdateDiaSemanal, {upsert: true}, function(erro){
+										if(erro){
+											 req.flash('erro', 'Erro ao atualizar o gráfico: ' + erro);
+										};
+									});
+								}
+								req.flash('info', 'Registro cadastrado com sucesso!');
+								res.redirect('/addhoraextra');
+							}
+					});
+			}else{
+				 res.render('horaextra/adicionar');
 			}
 		},
 
@@ -58,8 +60,6 @@ module.exports = function(app){
 			var email = dev.email;
 			var dataini = moment().subtract(20, 'days').calendar();
 			var datafim = moment().format('L');
-			console.log(dataini);
-			console.log(datafim);
       var filter = {
 				  "email": email,
 					$or:[{"datainicial": {$gte: dataini, $lte: dataini}}, {"datafinal": {$gte: datafim, $lte: datafim}}]
@@ -83,15 +83,11 @@ module.exports = function(app){
       if (solicitacao == ''){
 				solicitacao = {$ne: ""};
 			}
-			console.log(dataini);
-			console.log(datafim);
 			//Se tiver nulas as datas pego de 20 dias atrás
       if(dataini == '' || datafim == ''){
 				var dataini = moment().subtract(20, 'days').calendar();
 				var datafim = moment().format('L');
 			};
-			console.log(dataini);
-			console.log(datafim);
       var filter = {
 				  "email": email,
 					"solicitacao": solicitacao,

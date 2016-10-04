@@ -44,9 +44,9 @@ module.exports = function(app){
 					if (data == null) {
 						var esquemagrafico = new HoraExtraGrafico();
 						esquemagrafico.email = dev.email;
-						esquemagrafico.semanalabreviada   = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-						esquemagrafico.totalpordiasemanal = [0, 0, 0, 0, 0, 0];
-            esquemagrafico.valorpordiasemanal = [0, 0, 0, 0, 0, 0];
+						esquemagrafico.semanalabreviada   = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+						esquemagrafico.totalpordiasemanal = [0, 0, 0, 0, 0, 0, 0];
+            esquemagrafico.valorpordiasemanal = [0, 0, 0, 0, 0, 0, 0];
 						esquemagrafico.mensalabreviada   = ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 						esquemagrafico.totalpormensal    = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 						esquemagrafico.valorpormensal    = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
