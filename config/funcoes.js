@@ -41,10 +41,6 @@ exports.DataEmISO = function (data) {
     var anoini = datastr.substr(6, 4);
     var mesini = datastr.substr(3, 2);
     var diaini = datastr.substr(0, 2);
-    console.log(anoini);
-    console.log(mesini);
-    console.log(diaini);
-
     var datacorreta = new Date(anoini, mesini-1, diaini, 0, 0).toISOString();
     return datacorreta;
  }

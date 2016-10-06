@@ -18,25 +18,25 @@ block content
             br
           div(class="form-group")
             label Nome:
-            input(type="text", class="form-control", name="nome", placeholder="Nome", autofocus, required)
+            input(type="text", class="form-control", name="nome", placeholder="Nome", autofocus, required="required")
           div(class="form-group")
             label E-mail:
-            input(type="email", class="form-control", placeholder="E-mail", name="email", required)
+            input(type="email", class="form-control", placeholder="E-mail", name="email", required="required")
           div(class="form-group")
             label Senha:
-            input(type="password", class="form-control", placeholder="Senha", name="senha", required)
+            input(type="password", class="form-control", placeholder="Senha", name="senha", required="required")
           div(class="form-group")
             label Confirmar senha:
-            input(type="password", class="form-control", name="senha_confirmar", placeholder="Confirmar Senha", required)
+            input(type="password", class="form-control", name="senha_confirmar", placeholder="Confirmar Senha", required="required")
           div(class="form-group")
             label Salário:        
-            input(type="number", name="salario" pattern="^\d+(\.|\,)\d{2}$", placeholder="Preencher sem o ponto e a virgular", required)
+            input(type="number", name="salario" pattern="^\d+(\.|\,)\d{2}$", placeholder="Preencher sem o ponto e a virgular", required="required")
           div(class="form-group")
             label Total de jornada de trabalho:        
-            input(type="range", name="horasemanal", value="220" min="120" max="320", required)
+            input(type="range", name="horasemanal", value="220" min="120" max="320", required="required")
             div(class="form-group")
               label Fator %:        
-              input(type="range", name="fator", value="50" min="1" max="100", required)
+              input(type="range", name="fator", value="50" min="1" max="100", required="required")
             
           button(type="submit", class="btn btn-primary btn-block") Gravar    
 

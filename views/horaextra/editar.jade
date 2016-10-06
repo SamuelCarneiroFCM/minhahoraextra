@@ -22,19 +22,19 @@ block content
                     input(type="hidden", name="email", value="#{hora.email}")
                 div(class="form-group")
                     label Solicitação:
-                    input(type="text", data-clear-btn="true", name="solicitacao", placeholder="ML-00001", value="#{hora.solicitacao}")
+                    input(type="text", data-clear-btn="true", name="solicitacao", placeholder="ML-00001", value="#{hora.solicitacao}", required="required")
                 div(class="form-group")
                     label Data do início:
-                    input(type="date", data-clear-btn="true", name="datainicial", value="#{moment(hora.datainicial).format('L')}")                 
+                    input(type="date", data-clear-btn="true", name="datainicial", value="#{moment(hora.datainicial).format('L')}", required="required")                 
                 div(class="form-group")
                     label Hora do início:
-                    input(type="time", data-clear-btn="true", name="horainicial", value="#{hora.horainicial}")
+                    input(type="time", data-clear-btn="true", name="horainicial", value="#{hora.horainicial}", required="required")
                 div(class="form-group")
                     label Data de final:
-                    input(type="date", data-clear-btn="true", name="datafinal", value="#{moment(hora.datafinal).format('L')}")
+                    input(type="date", data-clear-btn="true", name="datafinal", value="#{moment(hora.datafinal).format('L')}", required="required")
                 div(class="form-group")
                     label Hora de final:
-                    input(type="time", data-clear-btn="true", name="horafinal", value="#{hora.horafinal}")
+                    input(type="time", data-clear-btn="true", name="horafinal", value="#{hora.horafinal}", required="required")
                 button(type="submit" class="btn btn-primary") Salvar
                                
       div(data-role="footer", data-position="fixed")

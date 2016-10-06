@@ -20,9 +20,9 @@ module.exports = function(app){
 					var hora = {
 							email: req.body.email,
 							solicitacao: req.body.solicitacao,
-							datainicial: moment(req.body.datainicial).format('L'),
+							datainicial: req.body.datainicial,
 							horainicial: req.body.horainicial,
-							datafinal: moment(req.body.datafinal).format('L'),
+							datafinal: req.body.datafinal,
 							horafinal: req.body.horafinal,
 							quantidadejornada: qtdhora
 					};
@@ -59,37 +59,30 @@ module.exports = function(app){
 		consultahoraextra: function(req, res){
 			var dev = req.session.desenvolvedor;
 			var email = dev.email;
-			var data = funcoes.DataEmISO(moment().subtract(20, 'days').calendar());
-      var filter = {
+		 	var data = funcoes.DataEmISO(moment().subtract(20, 'days').calendar());
+            var filter = {
 				  "email": email,
-				};
+				  "datainicial": {"$gte": data}
+		    };
 			Horaextra.find(filter,
 				function(err, dados) {
 					if(err){
 						req.flash('erro', 'Erro ao localizar a hora extra' + err);
 						res.render('horaextra/consultar', {listhoras : 0});
 					}else{
-						console.log(dados);
 						res.render('horaextra/consultar', {listhoras : dados});
 					}
 			});
     },
 
 		filtrohoraextra: function(req, res){
-      var email = req.query.email;
+            var email = req.query.email;
 			var solicitacao = req.query.solicitacao;
-      var dataini = moment(req.query.datainicial).format('L');
-			var datafim = moment(req.query.datafinal).format('L');
-			console.log(dataini);
-			console.log(datafim);
+            var dataini = funcoes.DataEmISO(moment(req.query.datainicial).format('L'));
+			var datafim = funcoes.DataEmISO(moment(req.query.datafinal).format('L'));
       if (solicitacao == ''){
 				solicitacao = {$ne: ""};
 			}
-			//Se tiver nulas as datas pego de 20 dias atrás
-      if(dataini == '' || datafim == ''){
-				var dataini = moment().subtract(20, 'days').calendar();
-				var datafim = moment().format('L');
-			};
       var filter = {
 				  "email": email,
 					"solicitacao": solicitacao,
