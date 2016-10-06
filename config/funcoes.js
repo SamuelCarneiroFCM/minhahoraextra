@@ -37,9 +37,14 @@ exports.DataEmISO = function (data) {
     return null;
   }
   else{
-    var anoini = datastr.substr(0, 4);
-    var mesini = datastr.substr(5, 2);
-    var diaini = datastr.substr(8, 2);
+    console.log(data);
+    var anoini = datastr.substr(6, 4);
+    var mesini = datastr.substr(3, 2);
+    var diaini = datastr.substr(0, 2);
+    console.log(anoini);
+    console.log(mesini);
+    console.log(diaini);
+
     var datacorreta = new Date(anoini, mesini-1, diaini, 0, 0).toISOString();
     return datacorreta;
  }
@@ -49,25 +54,25 @@ exports.UpdateDiaSemanalAtual = function(QtdJornada){
   var up;
   switch (new Date().getDay()) {
       case 0:
-          up = {$set: {"totalpordiasemanal.0": parseFloat(QtdJornada)}};
+          up = {$inc: {"totalpordiasemanal.0": parseFloat(QtdJornada)}};
           break;
       case 1:
-          up = {$set: {"totalpordiasemanal.1": parseFloat(QtdJornada)}};
+          up = {$inc: {"totalpordiasemanal.1": parseFloat(QtdJornada)}};
           break;
       case 2:
-          up = {$set: {"totalpordiasemanal.2": parseFloat(QtdJornada)}};
+          up = {$inc: {"totalpordiasemanal.2": parseFloat(QtdJornada)}};
           break;
       case 3:
-          up = {$set: {"totalpordiasemanal.3": parseFloat(QtdJornada)}};
+          up = {$inc: {"totalpordiasemanal.3": parseFloat(QtdJornada)}};
           break;
       case 4:
-          up = {$set: {"totalpordiasemanal.4": parseFloat(QtdJornada)}};
+          up = {$inc: {"totalpordiasemanal.4": parseFloat(QtdJornada)}};
           break;
       case 5:
-          up = {$set: {"totalpordiasemanal.5": parseFloat(QtdJornada)}};
+          up = {$inc: {"totalpordiasemanal.5": parseFloat(QtdJornada)}};
           break;
       case  6:
-          up = {$set: {"totalpordiasemanal.6": parseFloat(QtdJornada)}};
+          up = {$inc: {"totalpordiasemanal.6": parseFloat(QtdJornada)}};
   };
   return up;
 };

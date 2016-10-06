@@ -38,7 +38,8 @@ module.exports = function(app){
 								var data1 = new Date(hora.datafinal);
 								var data2 = moment().subtract(7, 'days')._d;
 								var AtualizarGF = (moment(data1).isBefore(data2));
-				        if(AtualizarGF){
+				        if(AtualizarGF)
+								{
 								  var	UpdateDiaSemanal = funcoes.UpdateDiaSemanalAtual(qtdhora);
 									HoraExtraGrafico.findOneAndUpdate({'email': hora.email}, UpdateDiaSemanal, {upsert: true}, function(erro){
 										if(erro){
@@ -58,11 +59,9 @@ module.exports = function(app){
 		consultahoraextra: function(req, res){
 			var dev = req.session.desenvolvedor;
 			var email = dev.email;
-			var dataini = moment().subtract(20, 'days').calendar();
-			var datafim = moment().format('L');
+			var data = funcoes.DataEmISO(moment().subtract(20, 'days').calendar());
       var filter = {
 				  "email": email,
-					$or:[{"datainicial": {$gte: dataini, $lte: dataini}}, {"datafinal": {$gte: datafim, $lte: datafim}}]
 				};
 			Horaextra.find(filter,
 				function(err, dados) {
@@ -70,6 +69,7 @@ module.exports = function(app){
 						req.flash('erro', 'Erro ao localizar a hora extra' + err);
 						res.render('horaextra/consultar', {listhoras : 0});
 					}else{
+						console.log(dados);
 						res.render('horaextra/consultar', {listhoras : dados});
 					}
 			});
@@ -80,6 +80,8 @@ module.exports = function(app){
 			var solicitacao = req.query.solicitacao;
       var dataini = moment(req.query.datainicial).format('L');
 			var datafim = moment(req.query.datafinal).format('L');
+			console.log(dataini);
+			console.log(datafim);
       if (solicitacao == ''){
 				solicitacao = {$ne: ""};
 			}

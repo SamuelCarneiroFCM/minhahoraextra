@@ -25,13 +25,13 @@ block content
                     input(type="text", data-clear-btn="true", name="solicitacao", placeholder="ML-00001", value="#{hora.solicitacao}")
                 div(class="form-group")
                     label Data do início:
-                    input(type="date", data-clear-btn="true", name="datainicial", value="#{hora.datainicial}")                 
+                    input(type="date", data-clear-btn="true", name="datainicial", value="#{moment(hora.datainicial).format('L')}")                 
                 div(class="form-group")
                     label Hora do início:
                     input(type="time", data-clear-btn="true", name="horainicial", value="#{hora.horainicial}")
                 div(class="form-group")
                     label Data de final:
-                    input(type="date", data-clear-btn="true", name="datafinal", value="#{hora.datafinal}")
+                    input(type="date", data-clear-btn="true", name="datafinal", value="#{moment(hora.datafinal).format('L')}")
                 div(class="form-group")
                     label Hora de final:
                     input(type="time", data-clear-btn="true", name="horafinal", value="#{hora.horafinal}")
