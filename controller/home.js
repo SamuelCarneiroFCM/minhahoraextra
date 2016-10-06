@@ -71,9 +71,9 @@ module.exports = function(app){
 		},
 
 		index: function(req, res){
-			var TotalAnual = "179.00";
-      var TotalMensal = "100.00";
-			res.render('home/index', {totais : {TotalAnual, TotalMensal}});
+			var TotalSemanal = "0.00";
+      var TotalMensal = "0.00";
+			res.render('home/index', {totais : {TotalSemanal, TotalMensal}});
     },
 
 		novo: function(req,res){
