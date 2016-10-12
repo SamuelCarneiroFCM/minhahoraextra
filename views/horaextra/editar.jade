@@ -7,7 +7,7 @@ block content
       div(role="main", data-role="container")
         div(class="ui-corner-all custom-corners")      
           div(class="ui-body ui-body-a")
-            form(action="/editar/#{hora.id}", method="POST")
+            form#fmeditar(action="/editar/#{hora.id}", method="POST")
                 if messages.erro
                   div(class="alert alert-danger")
                     p #{messages.erro}
@@ -25,13 +25,13 @@ block content
                     input(type="text", data-clear-btn="true", name="solicitacao", placeholder="ML-00001", value="#{hora.solicitacao}", required="required")
                 div(class="form-group")
                     label Data do início:
-                    input(type="date", data-clear-btn="true", name="datainicial", value="#{moment(hora.datainicial).format('L')}", required="required")                 
+                    input#datainicial(type="text", data-clear-btn="true", name="datainicial", value="#{moment(hora.datainicial).format('L')}", required="required")                 
                 div(class="form-group")
                     label Hora do início:
                     input(type="time", data-clear-btn="true", name="horainicial", value="#{hora.horainicial}", required="required")
                 div(class="form-group")
                     label Data de final:
-                    input(type="date", data-clear-btn="true", name="datafinal", value="#{moment(hora.datafinal).format('L')}", required="required")
+                    input#datafinal(type="text" data-clear-btn="true", name="datafinal", value="#{moment(hora.datafinal).format('L')}", required="required")
                 div(class="form-group")
                     label Hora de final:
                     input(type="time", data-clear-btn="true", name="horafinal", value="#{hora.horafinal}", required="required")
