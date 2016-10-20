@@ -19,10 +19,10 @@ module.exports = function(){
 
 	desenvolvedoresSchema.methods.validPassword = function(password, old_password){
 		return bcrypt.compareSync(password, old_password, null);
-	}
+	};
 
 	return mongoose.model('desenvolvedores', desenvolvedoresSchema);
-}
+};
 /*
 var desenvolvedoresSchema = mongoose.Schema({
 	 nome: {type: String, required: true},
