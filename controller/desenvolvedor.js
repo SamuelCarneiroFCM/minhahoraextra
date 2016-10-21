@@ -35,15 +35,15 @@ module.exports = function(app){
 							}
 							else
 							{
-								
-								var data1 = moment()._d;
+
+								var data1 = hora.datafinal;
 								var data2 = moment().subtract(7, 'days')._d;
 								var AtualizarGF = (moment(data2).isBefore(data1));
-								
-				                if(AtualizarGF)
+
+				        if(AtualizarGF)
 								{
 								    var UpdateDiaSemanal = funcoes.UpdateDiaSemanalAtual(qtdhora);
-								  
+
 									HoraExtraGrafico.findOneAndUpdate({'email': hora.email}, UpdateDiaSemanal, {upsert: true}, function(erro){
 										if(erro){
 											 req.flash('erro', 'Erro ao atualizar o gráfico: ' + erro);
@@ -73,6 +73,7 @@ module.exports = function(app){
 						req.flash('erro', 'Erro ao localizar a hora extra' + err);
 						res.render('horaextra/consultar', {listhoras : 0});
 					}else{
+						console.log(dados);
 						res.render('horaextra/consultar', {listhoras : dados});
 					}
 			});
@@ -115,17 +116,17 @@ module.exports = function(app){
 		gravarhoraextra: function(req, res){
     		if(validacaohora(req, res)){
 				Horaextra.findById(req.params.id, function(erro, dados){
-					
+
 					if(erro){
 						req.flash('erro', 'Erro ao gravar: ' + erro);
 						res.render('horaextra/editar', {hora: dados});
-						
+
 					}
 					else{
 						var hora    = dados;
 						var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial,
 							req.body.datafinal, req.body.horafinal);
-	
+
 						hora.email       = req.body.email;
 						hora.solicitacao = req.body.solicitacao;
 						hora.datainicial = req.body.datainicial;
@@ -133,7 +134,7 @@ module.exports = function(app){
 						hora.datafinal   = req.body.datafinal;
 						hora.horafinal   = req.body.horafinal;
 						hora.quantidadejornada = qtdhora;
-	
+
 						hora.save(function(err){
 							if(err){
 								req.flash('erro', 'Erro ao gravar: ' + err);
@@ -144,7 +145,7 @@ module.exports = function(app){
 							}
 						});
 					}
-					
+
 				});
 			}else{
 				res.render('horaextra/editar', {hora: req.body});
@@ -152,40 +153,43 @@ module.exports = function(app){
 		},
 
 		excluirhoraextra: function(req, res){
-			
+
 			Horaextra.findById(req.params.id, function(erro, dados){
-				
+
 				if(erro){
 					req.flash('erro', 'Erro ao excluir: '+ erro);
                     res.render('horaextra/consultar');
-					
+
 				}
 				else{
-					
-					var qtdHora =  dados.quantidadejornada;
-					
-				    var UpdateDiaSemanal = funcoes.UpdateDiaSemanalAtual(-qtdHora);
-				  
-					HoraExtraGrafico.findOneAndUpdate({'email': dados.email}, UpdateDiaSemanal, {upsert: true}, function(erro){
-						if(erro){
-						    req.flash('erro', 'Erro ao atualizar o gráfico: ' + erro);
-						}
-					});
-					
-					
-					dados.remove({'_id': req.params.id}, function(err, resultado){
-						if(err){
-							req.flash('erro', 'Erro ao excluir: '+ err);
-							res.render('horaextra/consultar');
-						}else{
-							req.flash('info', 'Registro excluído com sucesso!');
-							res.render('horaextra/consultar', {listhoras : resultado});
-						}
 
-					});
-					
+  					var data1 = dados.datafinal;
+	  				var data2 = moment().subtract(7, 'days')._d;
+		  			var AtualizarGF = (moment(data2).isBefore(data1));
+
+            if (AtualizarGF){
+							  var qtdHora =  dados.quantidadejornada;
+						    var UpdateDiaSemanal = funcoes.UpdateDiaSemanalAtual(-qtdHora);
+
+								HoraExtraGrafico.findOneAndUpdate({'email': dados.email}, UpdateDiaSemanal, {upsert: true}, function(erro){
+									if(erro){
+									    req.flash('erro', 'Erro ao atualizar o gráfico: ' + erro);
+									}
+								});
+            };
+
+						dados.remove({'_id': req.params.id}, function(err, resultado){
+							if(err){
+								req.flash('erro', 'Erro ao excluir: '+ err);
+								res.render('horaextra/consultar');
+							}else{
+								req.flash('info', 'Registro excluído com sucesso!');
+								res.render('horaextra/consultar', {listhoras : resultado});
+					   }
+						});
+
 				}
-				
+
 			});
 		}
 

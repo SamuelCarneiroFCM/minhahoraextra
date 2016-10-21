@@ -30,9 +30,9 @@ block content
                 each hora in listhoras
                   tr                      
                     th #{hora.solicitacao}
-                    td #{moment(hora.datainicial).format('DD/MM/YYYY')}          
+                    td #{hora.datainicial}          
                     td #{hora.horainicial}           
-                    td #{moment(hora.datafinal).format('DD/MM/YYYY')}
+                    td #{moment(hora.datafinal).format("DD/MM/YYYY")}
                     td #{hora.horafinal}                          
                     td #{hora.quantidadejornada} hs 
                     td 
