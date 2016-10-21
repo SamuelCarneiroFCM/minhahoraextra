@@ -69,6 +69,50 @@ exports.UpdateDiaSemanalAtual = function(QtdJornada){
           break;
       case  6:
           up = {$inc: {"totalpordiasemanal.6": parseFloat(QtdJornada)}};
+          break;
+  };
+  return up;
+};
+
+exports.UpdatePorMensalAtual = function(QtdJornada){
+  var up;
+  switch (new Date().getMonth()) {
+      case 0:
+          up = {$inc: {"totalpormensal.0": parseFloat(QtdJornada)}};
+          break;
+      case 1:
+          up = {$inc: {"totalpormensal.1": parseFloat(QtdJornada)}};
+          break;
+      case 2:
+          up = {$inc: {"totalpormensal.2": parseFloat(QtdJornada)}};
+          break;
+      case 3:
+          up = {$inc: {"totalpormensal.3": parseFloat(QtdJornada)}};
+          break;
+      case 4:
+          up = {$inc: {"totalpormensal.4": parseFloat(QtdJornada)}};
+          break;
+      case 5:
+          up = {$inc: {"totalpormensal.5": parseFloat(QtdJornada)}};
+          break;
+      case 6:
+          up = {$inc: {"totalpormensal.6": parseFloat(QtdJornada)}};
+          break;
+      case 7:
+          up = {$inc: {"totalpormensal.7": parseFloat(QtdJornada)}};
+          break;
+      case 8:
+          up = {$inc: {"totalpormensal.8": parseFloat(QtdJornada)}};
+          break;
+      case 9:
+          up = {$inc: {"totalpormensal.9": parseFloat(QtdJornada)}};
+          break;
+      case 10:
+          up = {$inc: {"totalpormensal.10": parseFloat(QtdJornada)}};
+          break;
+      case 11:
+          up = {$inc: {"totalpormensal.11": parseFloat(QtdJornada)}};
+          break;
   };
   return up;
 };

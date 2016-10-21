@@ -9,12 +9,10 @@ module.exports = function(){
 		  totalpordiasemanal: [],
 		  valorpordiasemanal: [],
 		  mensalabreviada : [],
-          totalpormensal: [],
+      totalpormensal: [],
 		  valorpormensal: []
 	  }, {collection: 'horaextragrafico'});
 
 	return mongoose.model('horaextragrafico', horaextragraficoSchema);
-	
+
 };
-
-

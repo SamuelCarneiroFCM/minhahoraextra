@@ -158,8 +158,7 @@ module.exports = function(app){
 
 				if(erro){
 					req.flash('erro', 'Erro ao excluir: '+ erro);
-                    res.render('horaextra/consultar');
-
+          res.render('horaextra/consultar');
 				}
 				else{
 
