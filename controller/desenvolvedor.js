@@ -20,12 +20,13 @@ module.exports = function(app){
 					var hora = {
 							email: req.body.email,
 							solicitacao: req.body.solicitacao,
-							datainicial: req.body.datainicial,
+							datainicial: new Date(req.body.datainicial),
 							horainicial: req.body.horainicial,
-							datafinal: req.body.datafinal,
+							datafinal: new Date(req.body.datafinal),
 							horafinal: req.body.horafinal,
 							quantidadejornada: qtdhora
 					};
+					console.log(hora);
 					var horas = new Horaextra(hora);
 					horas.save(function(erro, hora) {
 							if(erro)
@@ -80,9 +81,9 @@ module.exports = function(app){
     },
 
 		filtrohoraextra: function(req, res){
-            var email = req.query.email;
+      var email = req.query.email;
 			var solicitacao = req.query.solicitacao;
-            var dataini = funcoes.DataEmISO(moment(req.query.datainicial).format('L'));
+      var dataini = funcoes.DataEmISO(moment(req.query.datainicial).format('L'));
 			var datafim = funcoes.DataEmISO(moment(req.query.datafinal).format('L'));
       if (solicitacao == ''){
 				solicitacao = {$ne: ""};
@@ -103,11 +104,14 @@ module.exports = function(app){
 		},
 
 		editarhoraextra: function(req, res){
+			console.log(req.params.id);
 			Horaextra.findById(req.params.id, function(err, dados){
 				if(err){
 					req.flash('erro', 'Erro ao editar: ' + err);
 					res.redirect('/horaextra/consultar');
 				}else{
+					console.log(dados);
+					console.log(moment(dados.datainicial).format('L'));
 					res.render('horaextra/editar', {hora: dados});
 				}
 			});
