@@ -6,7 +6,6 @@ module.exports = function(req, res){
 	req.assert('solicitacao', 'Informe uma solicitação.').notEmpty();
   req.assert('datainicial', 'Informe a data inicial.').notEmpty();
 	req.assert('horainicial', 'Informe a hora inicial.').notEmpty();
-	req.assert('datafinal', 'Informe a data final.').notEmpty();
 	req.assert('horafinal', 'Informe a hora final.').notEmpty();
 
 

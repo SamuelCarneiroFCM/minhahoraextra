@@ -7,7 +7,6 @@ module.exports = function(app){
       moment            = require('moment'),
 	    funcoes           = require('../config/funcoes.js');
 
-
 	var DesenvolvedorController = {
 		addhoraextra: function(req, res){
     	res.render('horaextra/adicionar');
@@ -15,14 +14,13 @@ module.exports = function(app){
 
 		adicionarhoraextra: function(req, res){
 			if(validacaohora(req, res)){
-					var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial, req.body.datafinal, req.body.horafinal);
+					var qtdhora = funcoes.qtdHora(req.body.datainicial, req.body.horainicial, req.body.horafinal);
 
 					var hora = {
 							email: req.body.email,
 							solicitacao: req.body.solicitacao,
-							datainicial: new Date(req.body.datainicial),
+							datainicial: req.body.datainicial,
 							horainicial: req.body.horainicial,
-							datafinal: new Date(req.body.datafinal),
 							horafinal: req.body.horafinal,
 							quantidadejornada: qtdhora
 					};
@@ -36,8 +34,7 @@ module.exports = function(app){
 							}
 							else
 							{
-
-								var data1 = hora.datafinal;
+								var data1 = hora.datainical;
 								var data2 = moment().subtract(7, 'days')._d;
 								var AtualizarGF = (moment(data2).isBefore(data1));
 
@@ -63,8 +60,8 @@ module.exports = function(app){
 		consultahoraextra: function(req, res){
 			var dev = req.session.desenvolvedor;
 			var email = dev.email;
-		 	var data = funcoes.DataEmISO(moment().subtract(20, 'days').calendar());
-            var filter = {
+		 	var data = moment().subtract(20, 'days').calendar();
+      var filter = {
 				  "email": email,
 				  "datainicial": {"$gte": data}
 		    };
@@ -83,15 +80,15 @@ module.exports = function(app){
 		filtrohoraextra: function(req, res){
       var email = req.query.email;
 			var solicitacao = req.query.solicitacao;
-      var dataini = funcoes.DataEmISO(moment(req.query.datainicial).format('L'));
-			var datafim = funcoes.DataEmISO(moment(req.query.datafinal).format('L'));
+      var dataini = moment(req.query.datainicial).utc().format('L');
+
       if (solicitacao == ''){
 				solicitacao = {$ne: ""};
 			}
       var filter = {
 				  "email": email,
 					"solicitacao": solicitacao,
-					$or:[{"datainicial": {$gte: dataini, $lte: dataini}}, {"datafinal": {$gte: datafim, $lte: datafim}}]
+					$or:[{"datainicial": {$gte: dataini, $lte: dataini}}]
 				};
 			Horaextra.find(filter, function(err, dados) {
 					if(err){

@@ -19,12 +19,11 @@ block content
             table#listahoraextra(data-role="table" data-mode="columntoggle" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-text="Ajustar Colunas...")             
               thead(class="ui-bar-d")                         
                 tr                      
-                  th(data-priority="1") Solicitação
-                  th(data-priority="2") Data Inicial
-                  th(data-priority="3") Hora Inicial
-                  th(data-priority="4") Data Final
-                  th(data-priority="5") Hora Final
-                  th(data-priority="6") Qtd. Jornada
+                  th(data-priority="1") Solicitação  
+                  th(data-priority="2") Data         
+                  th(data-priority="3") Hora Inicial 
+                  th(data-priority="5") Hora Final   
+                  th(data-priority="6") Qtd. Jornada 
                   th(data-priority="7")
               tbody                
                 each hora in listhoras
@@ -32,7 +31,6 @@ block content
                     th #{hora.solicitacao}
                     td #{moment(hora.datainicial).utc().format('L')}         
                     td #{hora.horainicial}           
-                    td #{moment(hora.datafinal).utc().format('L')}
                     td #{hora.horafinal}                          
                     td #{hora.quantidadejornada} hs 
                     td 
@@ -59,11 +57,8 @@ block content
               label Solicitação:
               input(type="text", data-clear-btn="true", name="solicitacao",  placeholder="ML-00001")
           div(class="form-group")
-              label Data do início:
-              input(type="date", data-clear-btn="true", name="datainicial", required="required")                 
-          div(class="form-group")
-              label Data de final:
-              input(type="date", data-clear-btn="true", name="datafinal", required="required")
+              label Data:
+              input(type="date", data-clear-btn="true", name="datainicial")                 
           button(type="submit" class="btn btn-primary") Consultar
           
 

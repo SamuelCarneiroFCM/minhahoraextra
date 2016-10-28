@@ -7,7 +7,6 @@ module.exports = function(){
 		 solicitacao: {type: String, required: true},
 		 datainicial: {type: Date, required: true},
 	   horainicial: {type: String, required: true},
-	   datafinal: {type: Date, required: true},
 	   horafinal: {type: String, required: true},
 		 quantidadejornada: {type: String, required: true},
 		 data_cad : {type: Date, default: Date.now}
@@ -15,5 +14,3 @@ module.exports = function(){
 
 	return mongoose.model('horatrabalhada', horatrabalhadaSchema);
 };
-
-

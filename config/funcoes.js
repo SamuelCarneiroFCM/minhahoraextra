@@ -30,22 +30,6 @@ exports.qtdHora = function (datainicial, horainicial, datafinal, horafinal) {
   return obterquantidadehora(data1, data2);
 };
 
-
-exports.DataEmISO = function (data) {
-  var datastr = new String(data);
-  if (datastr == ''){
-    return null;
-  }
-  else{
-    console.log(data);
-    var anoini = datastr.substr(6, 4);
-    var mesini = datastr.substr(3, 2);
-    var diaini = datastr.substr(0, 2);
-    var datacorreta = new Date(anoini, mesini-1, diaini, 0, 0).toISOString();
-    return datacorreta;
- }
-};
-
 exports.UpdateDiaSemanalAtual = function(QtdJornada){
   var up;
   switch (new Date().getDay()) {
