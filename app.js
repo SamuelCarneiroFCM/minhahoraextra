@@ -1,15 +1,15 @@
-var express          = require('express'),
-    path             = require('path'),
+var   express          = require('express'),
+      path             = require('path'),
 	  logger           = require('morgan'),
 	  cookieParser     = require('cookie-parser'),
 	  bodyParser   	   = require('body-parser'),
-	  session        	 = require('express-session'),
-	  load          	 = require('express-load'),
+	  session          = require('express-session'),
+	  load             = require('express-load'),
 	  mongoose         = require('mongoose'),
 	  flash            = require('express-flash'),
 	  moment           = require('moment'),
 	  expressValidator = require('express-validator'),
-    URLdb            = require('./config/URLdb');
+      URLdb            = require('./config/URLdb');
 
 
 //conexão com o mongodb
@@ -48,7 +48,7 @@ app.use(session({
    resave: false,
    saveUninitialized: false
  }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(app.static(path.join(__dirname, 'public')));
 app.use(flash());
 
 app.use(function(req, res, next){
